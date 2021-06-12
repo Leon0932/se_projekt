@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ProfileView</class>
+ <widget class="QWidget" name="ProfileView">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>586</width>
+    <height>382</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>11</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item>
+    <layout class="QFormLayout" name="formLayout">
+     <item row="0" column="0">
+      <widget class="QLabel" name="nachnameLbl">
+       <property name="text">
+        <string>nachname</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="nachnameTbx"/>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="vornameLbl">
+       <property name="text">
+        <string>vorname</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLineEdit" name="vornameTbx"/>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="geburtsnameLbl">
+       <property name="text">
+        <string>geburtsname</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QLineEdit" name="geburtsnameTbx"/>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="emailLbl">
+       <property name="text">
+        <string>email</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QLineEdit" name="emailTbx"/>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="landLbl">
+       <property name="text">
+        <string>land</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QLineEdit" name="landTbx"/>
+     </item>
+     <item row="5" column="0">
+      <widget class="QLabel" name="plzLbl">
+       <property name="text">
+        <string>plz</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1">
+      <widget class="QLineEdit" name="plzTbx"/>
+     </item>
+     <item row="6" column="0">
+      <widget class="QLabel" name="ortLbl">
+       <property name="text">
+        <string>ort</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="1">
+      <widget class="QLineEdit" name="ortTbx"/>
+     </item>
+     <item row="7" column="0">
+      <widget class="QLabel" name="strasseLbl">
+       <property name="text">
+        <string>strasse</string>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="1">
+      <widget class="QLineEdit" name="strasseTbx"/>
+     </item>
+     <item row="8" column="0">
+      <widget class="QLabel" name="hausnummerLbl">
+       <property name="text">
+        <string>hausnummer</string>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="1">
+      <widget class="QLineEdit" name="hausnummerTbx"/>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QPushButton" name="kontakteBtn">
+     <property name="text">
+      <string>Kontakte</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <widget class="QPushButton" name="orgRechteBtn">
+         <property name="text">
+          <string>Organisatorrechte ändern</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pwAendernBtn">
+         <property name="text">
+          <string>Passwort ändern</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QPushButton" name="abbBtn">
+         <property name="text">
+          <string>Abbrechen</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="uebernehmenBtn">
+         <property name="text">
+          <string>Übernehmen</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="okBtn">
+         <property name="text">
+          <string>Ok</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <spacer name="verticalSpacer_2">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>12</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

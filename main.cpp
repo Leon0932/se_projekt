@@ -1,4 +1,4 @@
-#include "loginwindow.h"
+#include "loginview.h"
 #include "createhauptorganisatorview.h"
 
 #include <QApplication>
@@ -156,13 +156,13 @@ void createTestData() {
     ddao->insert(d3);
 
     Klassenmitglied mp = Klassenmitglied();
-    Daten d4 = Daten("Pijarowski", "Matthias", "", 5, "Giengen", "Deutschland", 90537, "Wildermuthstraße", "matthias.pijarowski.hs-aalen.de", "");
+    Daten d4 = Daten("Pijarowski", "Matthias", "", 0, "Giengen", "Deutschland", 90537, "Ws", "matthias.pijarowski.hs-aalen.de", "");
     d4.setKlassenmitglied(&mp);
     d4.setOrganisator(&mm);
     kdao->insert(mp);
     ddao->insert(d4);
 
-    Daten d5 = Daten("Pijarowski", "Matthias", "", 5, "Giengen", "Deutschland", 90537, "Ws", "matthias.pijarowski@htw-aalen.de", "Die Änderung ist ein Kommentar");
+    Daten d5 = Daten("Pijarowski", "Matthias", "", 0, "Giengen", "Deutschland", 90537, "Ws", "matthias.pijarowski@htw-aalen.de", "Die Änderung ist ein Kommentar");
     d5.setKlassenmitglied(&mp);
     d5.setOrganisator(&km);
     ddao->insert(d5);
@@ -206,7 +206,7 @@ int main(int argc, char *argv[])
 
     // if hauptorganisator exists show the login window else create a new hauptorganisator
     if (checkHauptorganistorExists()) {
-        LoginWindow w;
+        LoginView w;
         w.show();
         return a.exec();
     }

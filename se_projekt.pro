@@ -9,21 +9,27 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    addklassenmitgliedview.cpp \
+    changepasswortview.cpp \
     createhauptorganisatorview.cpp \
     daten.cpp \
     hauptorganisator.cpp \
     klassenmitglied.cpp \
     kontakt.cpp \
+    loginview.cpp \
     main.cpp \
-    loginwindow.cpp \
     organisator.cpp \
+    profileview.cpp \
     qtdatendao.cpp \
     qthauptorganisatordao.cpp \
     qtklassenmitglieddao.cpp \
     qtkontaktdao.cpp \
-    qtorganisatordao.cpp
+    qtorganisatordao.cpp \
+    showklassenlisteview.cpp
 
 HEADERS += \
+    addklassenmitgliedview.h \
+    changepasswortview.h \
     createhauptorganisatorview.h \
     daten.h \
     datendao.h \
@@ -33,18 +39,24 @@ HEADERS += \
     klassenmitglieddao.h \
     kontakt.h \
     kontaktdao.h \
-    loginwindow.h \
+    loginview.h \
     organisator.h \
     organisatordao.h \
+    profileview.h \
     qtdatendao.h \
     qthauptorganisatordao.h \
     qtklassenmitglieddao.h \
     qtkontaktdao.h \
-    qtorganisatordao.h
+    qtorganisatordao.h \
+    showklassenlisteview.h
 
 FORMS += \
+    addklassenmitgliedview.ui \
+    changepasswortview.ui \
     createhauptorganisatorview.ui \
-    loginwindow.ui
+    loginview.ui \
+    profileview.ui \
+    showklassenlisteview.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

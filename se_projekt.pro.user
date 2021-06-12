@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.15.0, 2021-06-09T23:22:18. -->
+<!-- Written by QtCreator 4.15.0, 2021-06-12T19:35:37. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -299,7 +299,6 @@
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:E:/Users/Matthias/Documents/se_projekt/se_projekt.pro</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">E:/Users/Matthias/Documents/se_projekt/se_projekt.pro</value>
-    <value type="QString" key="RunConfiguration.Arguments">test</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>

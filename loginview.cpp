@@ -1,5 +1,5 @@
-#include "loginwindow.h"
-#include "ui_loginwindow.h"
+#include "loginview.h"
+#include "ui_loginview.h"
 
 #include <iostream>
 #include <QCoreApplication>
@@ -11,21 +11,21 @@
 
 using std::string;
 
-LoginWindow::LoginWindow(QWidget *parent)
+LoginView::LoginView(QWidget *parent)
     : QWidget(parent)
-    , ui(new Ui::LoginWindow)
+    , ui(new Ui::LoginView)
 {
     ui->setupUi(this);
     connect(ui->loginBtn, SIGNAL(clicked(bool)), this, SLOT(onLoginBtnClicked()));
     connect(ui->exitBtn, SIGNAL(clicked(bool)), this, SLOT(onExitBtnClicked()));
 }
 
-LoginWindow::~LoginWindow()
+LoginView::~LoginView()
 {
     delete ui;
 }
 
-void LoginWindow::onLoginBtnClicked()
+void LoginView::onLoginBtnClicked()
 {
     std::cout << "login clicked" << std::endl;
     string email = ui->emailTbx->text().toStdString();
@@ -40,7 +40,7 @@ void LoginWindow::onLoginBtnClicked()
     std::cout << d.getTimestamp() << std::endl;
 }
 
-void LoginWindow::onExitBtnClicked()
+void LoginView::onExitBtnClicked()
 {
     QCoreApplication::quit();
 }
