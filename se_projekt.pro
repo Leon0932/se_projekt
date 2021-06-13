@@ -16,6 +16,7 @@ SOURCES += \
     hauptorganisator.cpp \
     klassenmitglied.cpp \
     kontakt.cpp \
+    kontaktview.cpp \
     loginview.cpp \
     main.cpp \
     organisator.cpp \
@@ -39,6 +40,7 @@ HEADERS += \
     klassenmitglieddao.h \
     kontakt.h \
     kontaktdao.h \
+    kontaktview.h \
     loginview.h \
     organisator.h \
     organisatordao.h \
@@ -54,6 +56,7 @@ FORMS += \
     addklassenmitgliedview.ui \
     changepasswortview.ui \
     createhauptorganisatorview.ui \
+    kontaktview.ui \
     loginview.ui \
     profileview.ui \
     showklassenlisteview.ui

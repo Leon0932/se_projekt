@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>713</width>
-    <height>383</height>
+    <width>805</width>
+    <height>453</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -70,33 +70,33 @@
         <item>
          <layout class="QVBoxLayout" name="verticalLayout">
           <item>
-           <widget class="QLabel" name="klassenlisteLabel">
-            <property name="focusPolicy">
-             <enum>Qt::ClickFocus</enum>
-            </property>
+           <widget class="QPushButton" name="pushButton">
             <property name="text">
              <string>Klassenliste</string>
             </property>
+            <property name="flat">
+             <bool>true</bool>
+            </property>
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="klassenmitgliedAddenLabel">
-            <property name="focusPolicy">
-             <enum>Qt::ClickFocus</enum>
-            </property>
-            <property name="layoutDirection">
-             <enum>Qt::LeftToRight</enum>
-            </property>
+           <widget class="QPushButton" name="pushButton_2">
             <property name="text">
-             <string>Klassenmitglied  
- hinzufugen</string>
+             <string>Klassenmitglied
+ hinzufügen</string>
+            </property>
+            <property name="flat">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="label">
+           <widget class="QPushButton" name="pushButton_3">
             <property name="text">
              <string>Meine Daten</string>
+            </property>
+            <property name="flat">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -241,7 +241,7 @@
             </property>
            </spacer>
           </item>
-          <item row="10" column="1">
+          <item row="11" column="1">
            <spacer name="verticalSpacer_3">
             <property name="orientation">
              <enum>Qt::Vertical</enum>
@@ -253,6 +253,13 @@
              </size>
             </property>
            </spacer>
+          </item>
+          <item row="10" column="1">
+           <widget class="QPushButton" name="kontakteBtn">
+            <property name="text">
+             <string>Kontakte</string>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
@@ -305,7 +312,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>713</width>
+     <width>805</width>
      <height>21</height>
     </rect>
    </property>

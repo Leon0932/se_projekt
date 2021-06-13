@@ -12,6 +12,7 @@
 #include "qtklassenmitglieddao.h"
 
 #include "loginview.h"
+#include "kontaktview.h"
 #include "organisatordao.h"
 #include "qtorganisatordao.h"
 
@@ -36,7 +37,8 @@ CreateHauptorganisatorView::~CreateHauptorganisatorView()
 
 void CreateHauptorganisatorView::onKontakteBtnClicked()
 {
-
+    KontaktView *kv = new KontaktView();
+    kv->show();
 }
 
 void CreateHauptorganisatorView::onSaveBtnClicked()

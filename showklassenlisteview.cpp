@@ -1,6 +1,7 @@
 #include "showklassenlisteview.h"
 #include "ui_showklassenlisteview.h"
 
+#include "addklassenmitgliedview.h"
 #include "qtdatendao.h"
 
 #include "QTableWidgetItem"
@@ -15,6 +16,7 @@ ShowKlassenlisteView::ShowKlassenlisteView(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->tableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
     // connect(ui->tableWidget, SIGNAL(cellClicked(int,int)), this, SLOT(onTablerowClicked(int,int)));
     connect(ui->tableWidget, SIGNAL(cellDoubleClicked(int,int)), this, SLOT(onTablerowDoubleClick(int,int)));
     connect(ui->ausloggenButton, SIGNAL(clicked(bool)), this, SLOT(onAusloggenBtnClicked()));
@@ -38,7 +40,7 @@ void ShowKlassenlisteView::init()
     }
 
     ui->tableWidget->setRowCount(dList->size());
-    ui->tableWidget->setColumnCount(2);
+    ui->tableWidget->setColumnCount(2); // passe RowCount An!
     int counter = 0;
     for (auto const& i : *dList) {
         QTableWidgetItem *item = new QTableWidgetItem(QString::fromStdString(i->getNachname()));
@@ -66,7 +68,9 @@ void ShowKlassenlisteView::onAusloggenBtnClicked()
 
 void ShowKlassenlisteView::onAddKlassenmitgliedLblClicked()
 {
-    
+    AddKlassenmitgliedView *addView = new AddKlassenmitgliedView();
+    addView->show();
+    this->close();
 }
 
 void ShowKlassenlisteView::onShowProfileLblClicked()
