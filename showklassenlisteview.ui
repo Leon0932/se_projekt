@@ -61,33 +61,33 @@
       <item>
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>
-         <widget class="QLabel" name="klassenlisteLabel">
-          <property name="focusPolicy">
-           <enum>Qt::ClickFocus</enum>
-          </property>
+         <widget class="QPushButton" name="klassenlisteBtn">
           <property name="text">
            <string>Klassenliste</string>
           </property>
+          <property name="flat">
+           <bool>true</bool>
+          </property>
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="klassenmitgliedAddenLabel">
-          <property name="focusPolicy">
-           <enum>Qt::ClickFocus</enum>
-          </property>
-          <property name="layoutDirection">
-           <enum>Qt::LeftToRight</enum>
-          </property>
+         <widget class="QPushButton" name="addKmBtn">
           <property name="text">
-           <string>Klassenmitglied  
- hinzufugen</string>
+           <string>Klassenmitglied
+ hinzufügen</string>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label">
+         <widget class="QPushButton" name="meineDatenbtn">
           <property name="text">
            <string>Meine Daten</string>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
           </property>
          </widget>
         </item>
@@ -107,7 +107,7 @@
        </layout>
       </item>
       <item>
-       <widget class="QListWidget" name="listWidget"/>
+       <widget class="QTableWidget" name="tableWidget"/>
       </item>
      </layout>
     </item>

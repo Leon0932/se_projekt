@@ -12,6 +12,7 @@ QtDatenDAO::QtDatenDAO()
     insert_query.prepare("INSERT INTO Daten (name, nachname, geburtsname, email, land, plz, ort, strasse, hausnummer, kommentar, km_id, org_id)"
     "VALUES (:name, :nachname, :geburtsname, :email, :land, :plz, :ort, :strasse, :hausnummer, :kommentar, :km_id, :org_id)");
     search_email_query.prepare("SELECT * FROM Daten WHERE email=:email");
+    select_query.prepare("SELECT * FROM Daten d1 WHERE zeitpunkt = (SELECT max(zeitpunkt) FROM Daten d2 WHERE d1.km_id = d2.km_id);");
     clean_query.prepare("DELETE FROM Daten");
 }
 
@@ -79,8 +80,28 @@ bool QtDatenDAO::searchEmail(Daten &daten)
     return true;
 }
 
-bool QtDatenDAO::select(Daten &daten, std::list<Kontakt *> datenList)
+bool QtDatenDAO::select(Daten &daten, std::list<Daten *> *datenList)
 {
+    if (!select_query.exec()) {
+        return false;
+    }
+
+    while (select_query.next()) {
+        Daten* d = new Daten();
+        d->setId(select_query.value(0).toInt());
+        d->setEmail(select_query.value(1).toString().toStdString());
+        d->setName(select_query.value(2).toString().toStdString());
+        d->setNachname(select_query.value(3).toString().toStdString());
+        d->setGeburtsname(select_query.value(4).toString().toStdString());
+        d->setLand(select_query.value(5).toString().toStdString());
+        d->setPlz(select_query.value(6).toInt());
+        d->setOrt(select_query.value(7).toString().toStdString());
+        d->setStrasse(select_query.value(8).toString().toStdString());
+        d->setHausnummer(select_query.value(9).toInt());
+        d->setKommentar(select_query.value(10).toString().toStdString());
+
+        datenList->push_back(d);
+    }
     return true;
 }
 

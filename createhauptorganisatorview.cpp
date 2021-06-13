@@ -11,6 +11,7 @@
 #include "klassenmitglieddao.h"
 #include "qtklassenmitglieddao.h"
 
+#include "loginview.h"
 #include "organisatordao.h"
 #include "qtorganisatordao.h"
 
@@ -65,10 +66,14 @@ void CreateHauptorganisatorView::onSaveBtnClicked()
     d.setKlassenmitglied(&hr);
     d.setOrganisator(&hr);
     DatenDAO *ddao = new QtDatenDAO();
-    ddao->insert(d);
+    if (ddao->insert(d)) {
+        LoginView *lv = new LoginView();
+        lv->show();
+        this->close();
+    }
 }
 
 void CreateHauptorganisatorView::onExitBtnClicked()
 {
-
+    this->close();
 }

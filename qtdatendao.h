@@ -8,7 +8,7 @@
 class QtDatenDAO : public DatenDAO
 {
 private:
-    QSqlQuery insert_query, search_email_query, clean_query;
+    QSqlQuery insert_query, search_email_query, select_query, clean_query;
 
 public:
     QtDatenDAO();
@@ -17,7 +17,7 @@ public:
     bool remove(int id) override;
     bool search(Daten &daten) override;
     bool searchEmail(Daten &daten) override;
-    bool select(Daten &daten, std::list<Kontakt*> datenList);
+    bool select(Daten &daten, std::list<Daten*> *datenList) override;
     bool clean() override;
 };
 

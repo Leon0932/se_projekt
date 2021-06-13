@@ -8,6 +8,10 @@
 #include "daten.h"
 #include "datendao.h"
 #include "qtdatendao.h"
+#include "organisatordao.h"
+#include "qtorganisatordao.h"
+
+#include "showklassenlisteview.h"
 
 using std::string;
 
@@ -27,17 +31,24 @@ LoginView::~LoginView()
 
 void LoginView::onLoginBtnClicked()
 {
-    std::cout << "login clicked" << std::endl;
     string email = ui->emailTbx->text().toStdString();
     string password = ui->passwordTbx->text().toStdString();
 
     Daten d = Daten();
     d.setEmail(email);
     DatenDAO *ddao = new QtDatenDAO();
-    ddao->searchEmail(d);
-
-    std::cout << d.getNachname() << std::endl;
-    std::cout << d.getTimestamp() << std::endl;
+    if (ddao->searchEmail(d)) {
+        OrganisatorDAO *odao = new QtOrganisatorDAO();
+        Organisator org = Organisator();
+        org.setId(d.getId());
+        if (odao->search(org)) {
+            if (password.compare(org.getPassword()) == 0) {
+                ShowKlassenlisteView *kv = new ShowKlassenlisteView();
+                kv->show();
+                this->close();
+            }
+        }
+    }
 }
 
 void LoginView::onExitBtnClicked()

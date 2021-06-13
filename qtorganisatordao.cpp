@@ -6,7 +6,7 @@ QtOrganisatorDAO::QtOrganisatorDAO()
     insert_query.prepare("INSERT INTO Organisator (km_id) VALUES (:km_id)");
     update_query.prepare("UPDATE Organisator SET passwort=:password WHERE km_id=:km_id");
     remove_query.prepare("DELETE FROM Organisator WHERE km_id=:id");
-    search_query.prepare("SELECT passwort from Organisator WHERE km_id=:id");
+    search_query.prepare("SELECT passwort from Organisator WHERE km_id=:km_id");
     clean_query.prepare("DELETE FROM Organisator");
 }
 
@@ -35,7 +35,7 @@ bool QtOrganisatorDAO::remove(int id)
 
 bool QtOrganisatorDAO::search(Organisator &organisator)
 {
-    search_query.bindValue(":km_id", QString::fromStdString(organisator.getPassword()));
+    search_query.bindValue(":km_id", organisator.getId());
     if (!search_query.exec()) {
         return false;
     }

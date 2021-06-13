@@ -12,7 +12,7 @@ public:
     virtual bool remove(int id) = 0;
     virtual bool search(Daten &daten) = 0;
     virtual bool searchEmail(Daten &daten) = 0;
-    virtual bool select(Daten &daten, std::list<Kontakt*> datenList) = 0;
+    virtual bool select(Daten &daten, std::list<Daten*> *datenList) = 0;
     virtual bool clean() = 0;
 };
 

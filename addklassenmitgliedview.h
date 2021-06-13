@@ -15,6 +15,11 @@ public:
     explicit AddKlassenmitgliedView(QWidget *parent = nullptr);
     ~AddKlassenmitgliedView();
 
+public slots:
+    void onUebernehmenBtnClicked();
+    void onAbbrechenBtnClicked();
+    void onAusloggenBtnClicked();
+
 private:
     Ui::AddKlassenmitgliedView *ui;
 };
