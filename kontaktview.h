@@ -5,6 +5,8 @@
 #include <list>
 
 #include "createhauptorganisatorview.h"
+#include "addklassenmitgliedview.h"
+#include "profileview.h"
 #include "kontakt.h"
 
 namespace Ui {
@@ -18,6 +20,8 @@ class KontaktView : public QWidget
 public:
     explicit KontaktView(QWidget *parent = nullptr);
     explicit KontaktView(CreateHauptorganisatorView *baseForm, list<Kontakt*> &kList);
+    explicit KontaktView(AddKlassenmitgliedView *baseForm, list<Kontakt*> &kList);
+    explicit KontaktView(ProfileView *baseForm, list<Kontakt*> &kList);
     ~KontaktView();
 
 public slots:
@@ -29,6 +33,9 @@ public slots:
 private:
     Ui::KontaktView *ui;
     CreateHauptorganisatorView *baseForm;
+    AddKlassenmitgliedView *kmForm;
+    ProfileView *profileView;
+    list<Kontakt*> *kList;
     void updateComboBox();
 };
 

@@ -107,6 +107,6 @@ void AddKlassenmitgliedView::onKlassenlisteBtnClicked()
 
 void AddKlassenmitgliedView::onMeineDatenBtnClicked()
 {
-    ProfileView *pv = new ProfileView(email);
+    ProfileView *pv = new ProfileView(email, email);
     pv->show();
 }

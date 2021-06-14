@@ -5,7 +5,7 @@ QtOrganisatorDAO::QtOrganisatorDAO()
 {
     insert_query.prepare("INSERT INTO Organisator (km_id) VALUES (:km_id)");
     update_query.prepare("UPDATE Organisator SET passwort=:password WHERE km_id=:km_id");
-    remove_query.prepare("DELETE FROM Organisator WHERE km_id=:id");
+    remove_query.prepare("DELETE FROM Organisator WHERE km_id=:km_id");
     search_query.prepare("SELECT passwort from Organisator WHERE km_id=:km_id");
     clean_query.prepare("DELETE FROM Organisator");
 }

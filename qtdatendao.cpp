@@ -84,12 +84,12 @@ bool QtDatenDAO::searchEmail(Daten &daten)
         return false;
     }
 
-    Klassenmitglied km = Klassenmitglied();
-    km.setId(search_email_query.value(13).toInt());
-    Organisator org = Organisator();
-    org.setId(km.getId());
+    Klassenmitglied *km = new Klassenmitglied();
+    km->setId(search_email_query.value(13).toInt());
+    Organisator *org = new Organisator();
+    org->setId(search_email_query.value(14).toInt());
     OrganisatorDAO* odao = new QtOrganisatorDAO();
-    odao->search(org);
+    odao->search(*org);
 
     daten.setId(search_email_query.value(0).toInt());
     daten.setEmail(search_email_query.value(1).toString().toStdString());
@@ -103,8 +103,8 @@ bool QtDatenDAO::searchEmail(Daten &daten)
     daten.setHausnummer(search_email_query.value(9).toInt());
     daten.setKommentar(search_email_query.value(10).toString().toStdString());
     daten.setTimestamp(search_email_query.value(11).toString().toStdString());
-    daten.setKlassenmitglied(&km);
-    daten.setOrganisator(&org);
+    daten.setKlassenmitglied(km);
+    daten.setOrganisator(org);
 
     return true;
 }

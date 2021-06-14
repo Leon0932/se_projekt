@@ -22,7 +22,39 @@ KontaktView::KontaktView(CreateHauptorganisatorView *baseForm, list<Kontakt*> &k
 {
     this->baseForm = baseForm;
     ui->tableWidget->setRowCount(kList.size());
-    qDebug() << kList.size();
+    int counter = 0;
+    for (auto const& kontakt : kList) {
+        QTableWidgetItem *vorwahlItem = new QTableWidgetItem(QString::fromStdString(kontakt->getVorwahl()));
+        QTableWidgetItem *nummerItem = new QTableWidgetItem(QString::fromStdString(kontakt->getNummer()));
+
+        ui->tableWidget->setItem(counter, 0, vorwahlItem);
+        ui->tableWidget->setItem(counter, 1, nummerItem);
+        counter++;
+    }
+    updateComboBox();
+}
+
+KontaktView::KontaktView(AddKlassenmitgliedView *baseForm, list<Kontakt *> &kList) : KontaktView()
+{
+    this->kmForm = baseForm;
+    ui->tableWidget->setRowCount(kList.size());
+    int counter = 0;
+    for (auto const& kontakt : kList) {
+        QTableWidgetItem *vorwahlItem = new QTableWidgetItem(QString::fromStdString(kontakt->getVorwahl()));
+        QTableWidgetItem *nummerItem = new QTableWidgetItem(QString::fromStdString(kontakt->getNummer()));
+
+        ui->tableWidget->setItem(counter, 0, vorwahlItem);
+        ui->tableWidget->setItem(counter, 1, nummerItem);
+        counter++;
+    }
+    updateComboBox();
+}
+
+KontaktView::KontaktView(ProfileView *baseForm, list<Kontakt *> &kList) : KontaktView()
+{
+    this->profileView = baseForm;
+    this->kList = &kList;
+    ui->tableWidget->setRowCount(kList.size());
     int counter = 0;
     for (auto const& kontakt : kList) {
         QTableWidgetItem *vorwahlItem = new QTableWidgetItem(QString::fromStdString(kontakt->getVorwahl()));
@@ -77,7 +109,7 @@ void KontaktView::onRemBtnClick()
 
 void KontaktView::onOkBtnClick()
 {
-    this->baseForm->kontaktList.clear();
+    this->kList->clear();
     int rows = ui->tableWidget->rowCount();
     for (int i = 0; i < rows; i++) {
         QTableWidgetItem *item = ui->tableWidget->item(i, 0);
@@ -88,7 +120,7 @@ void KontaktView::onOkBtnClick()
         Kontakt *k = new Kontakt();
         k->setVorwahl(vorwahl);
         k->setNummer(nummer);
-        this->baseForm->kontaktList.push_back(k);
+        this->kList->push_back(k);
     }
     this->close();
 }

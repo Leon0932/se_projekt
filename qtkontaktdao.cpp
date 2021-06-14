@@ -55,13 +55,10 @@ bool QtKontaktDAO::search(Kontakt &kontakt)
     return true;
 }
 
-bool QtKontaktDAO::select(Kontakt &kontakt, std::list<Kontakt *> kontaktList)
+bool QtKontaktDAO::select(Kontakt &kontakt, std::list<Kontakt *> &kontaktList)
 {
     select_query.bindValue(":daten_id", kontakt.getDaten()->getId());
     if (!select_query.exec()) {
-        return false;
-    }
-    if (!select_query.next()) {
         return false;
     }
 

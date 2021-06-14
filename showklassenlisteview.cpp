@@ -65,6 +65,7 @@ void ShowKlassenlisteView::init()
         return;
     }
 
+    ui->tableWidget->clearContents();
     ui->tableWidget->setRowCount(dList->size());
     ui->tableWidget->setColumnCount(10); // passe RowCount An!
     int counter = 0;
@@ -97,7 +98,8 @@ void ShowKlassenlisteView::init()
 void ShowKlassenlisteView::onTablerowDoubleClick(int row, int col)
 {
     string email = ui->tableWidget->item(row, 3)->text().toStdString();
-    ProfileView *pv = new ProfileView(email);
+    ProfileView *pv = new ProfileView(email, this->email);
+    pv->addKlassenlistView(this);
     pv->show();
 }
 
@@ -117,6 +119,6 @@ void ShowKlassenlisteView::onAddKlassenmitgliedLblClicked()
 
 void ShowKlassenlisteView::onMeineDatenBtnClick()
 {
-    ProfileView *pv = new ProfileView(email);
+    ProfileView *pv = new ProfileView(email, this->email);
     pv->show();
 }

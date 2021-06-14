@@ -125,7 +125,7 @@ void createTestData() {
     DatenDAO *ddao = new QtDatenDAO();
 
     Hauptorganisator rd = Hauptorganisator();
-    Daten d = Daten("Dietrich", "Roland", "", 0, "", "", 0, "", "roland.dietrich@hs-aalen.de", "");
+    Daten d = Daten("Dietrich", "Roland", "", 0, "", "", 0, "", "RD", "");
     d.setKlassenmitglied(&rd);
     d.setOrganisator(&rd);
     kdao->insert(rd);
@@ -224,8 +224,12 @@ int main(int argc, char *argv[])
         string param = argv[1];
         if (param.compare("clean") == 0) {
             cout << "run clean" << endl;
+            if (checkDatabaseExists()) {
+                std::remove("db.sqlite");
+                sleep_for(seconds(3)); //sleep so the db file get deleted
+            }
             establishDatabaseConnection();
-            clean();
+            createDatabaseTables();
             return 0;
         } else if (param.compare("test") == 0) {
             cout << "run test" << endl;

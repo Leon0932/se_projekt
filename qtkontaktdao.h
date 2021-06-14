@@ -15,7 +15,7 @@ public:
     bool update(Kontakt &kontakt) override;
     bool remove(int id) override;
     bool search(Kontakt &kontakt) override;
-    bool select(Kontakt &kontakt, std::list<Kontakt*> kontaktList) override;
+    bool select(Kontakt &kontakt, std::list<Kontakt*> &kontaktList) override;
     bool clean() override;
 };
 

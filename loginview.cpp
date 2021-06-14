@@ -13,6 +13,7 @@
 #include "qtorganisatordao.h"
 
 #include "showklassenlisteview.h"
+#include "changepasswortview.h"
 
 using std::string;
 
@@ -50,18 +51,25 @@ void LoginView::onLoginBtnClicked()
         return;
     }
 
-    Daten d = Daten();
-    d.setEmail(email);
+    Daten *d = new Daten();
+    d->setEmail(email);
     DatenDAO *ddao = new QtDatenDAO();
-    if (ddao->searchEmail(d)) {
+    if (ddao->searchEmail(*d)) {
         OrganisatorDAO *odao = new QtOrganisatorDAO();
-        Organisator org = Organisator();
-        org.setId(d.getId());
-        if (odao->search(org)) {
-            if (password.compare(org.getPassword()) == 0) {
-                ShowKlassenlisteView *kv = new ShowKlassenlisteView(d.getEmail());
-                kv->show();
-                this->close();
+        Organisator *org = new Organisator();
+        org->setId(d->getKlassenmitglied()->getId());
+        if (odao->search(*org)) {
+            if (password.compare(org->getPassword()) == 0) {
+                if (password.compare("password") == 0) {
+                    ChangePasswortView *cv = new ChangePasswortView(*org, true);
+                    cv->show();
+                    this->close();
+                }
+                else {
+                    ShowKlassenlisteView *kv = new ShowKlassenlisteView(d->getEmail());
+                    kv->show();
+                    this->close();
+                }
             }
             else {
                 QMessageBox *box = new QMessageBox();

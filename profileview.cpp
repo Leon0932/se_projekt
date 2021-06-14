@@ -2,6 +2,9 @@
 #include "ui_profileview.h"
 
 #include "qtdatendao.h"
+#include "qtkontaktdao.h"
+#include "kontaktview.h"
+#include "changepasswortview.h"
 
 ProfileView::ProfileView(QWidget *parent) :
     QWidget(parent),
@@ -15,17 +18,36 @@ ProfileView::ProfileView(QWidget *parent) :
     connect(ui->pwAendernBtn, SIGNAL(clicked(bool)), this, SLOT(pwAendernBtnClick()));
     connect(ui->orgRechteBtn, SIGNAL(clicked(bool)), this, SLOT(orgRechteBtnClick()));
     connect(ui->kontakteBtn, SIGNAL(clicked(bool)), this, SLOT(kontakteBtnClick()));
+    connect(ui->nextBtn, SIGNAL(clicked(bool)), this, SLOT(onNextBtnClick()));
+    connect(ui->prevBtn, SIGNAL(clicked(bool)), this, SLOT(onPrevBtnClick()));
 }
 
-ProfileView::ProfileView(std::string email) : ProfileView()
+ProfileView::ProfileView(std::string kmEmail, std::string orgEmail) : ProfileView()
 {
-    DatenDAO *ddao = new QtDatenDAO();
-    Daten d;
-    d.setEmail(email);
-    ddao->searchEmail(d);
+//    DatenDAO *ddao = new QtDatenDAO();
+//    OrganisatorDAO *odao = new QtOrganisatorDAO();
 
-    ddao->search(d, this->datenList);
-    initTbx(0);
+//    Daten orgDaten;
+//    orgDaten.setEmail(orgEmail);
+//    ddao->searchEmail(orgDaten);
+
+//    this->org.setId(orgDaten.getId());
+//    odao->search(this->org);
+
+//    Daten d;
+//    d.setEmail(kmEmail);
+//    ddao->searchEmail(d);
+//    this->km.setId(d.getKlassenmitglied()->getId());
+
+//    ddao->search(d, this->datenList);
+//    this->listPos = datenList.size() - 1;
+//    initTbx(this->listPos);
+
+//    ui->maxPosLbl->setText(QString::number(this->datenList.size()));
+//    ui->curPosLbl->setText(QString::number(this->listPos + 1));
+    this->kmEmail = kmEmail;
+    this->orgEmail = orgEmail;
+    loadData();
 }
 
 ProfileView::~ProfileView()
@@ -33,34 +55,127 @@ ProfileView::~ProfileView()
     delete ui;
 }
 
+void ProfileView::addKlassenlistView(ShowKlassenlisteView *kv)
+{
+    this->kv = kv;
+}
+
+void ProfileView::loadData()
+{
+    this->datenList.clear();
+
+    DatenDAO *ddao = new QtDatenDAO();
+    OrganisatorDAO *odao = new QtOrganisatorDAO();
+
+    Daten orgDaten;
+    orgDaten.setEmail(orgEmail);
+    ddao->searchEmail(orgDaten);
+
+    this->org.setId(orgDaten.getId());
+    odao->search(this->org);
+
+    Daten d;
+    d.setEmail(kmEmail);
+    ddao->searchEmail(d);
+    this->km.setId(d.getKlassenmitglied()->getId());
+
+    ddao->search(d, this->datenList);
+    this->listPos = datenList.size() - 1;
+    initTbx(this->listPos);
+
+    ui->maxPosLbl->setText(QString::number(this->datenList.size()));
+    ui->curPosLbl->setText(QString::number(this->listPos + 1));
+}
+
 void ProfileView::onOkBtnClick()
 {
-    qDebug() << "Click";
+    onuebernehmenBtnClick();
+    this->close();
 }
 
 void ProfileView::onuebernehmenBtnClick()
 {
+    Daten d = Daten(ui->nachnameTbx->text().toStdString(), ui->vornameTbx->text().toStdString(), ui->geburtsnameTbx->text().toStdString(),
+                    ui->hausnummerTbx->text().toInt(), ui->ortTbx->text().toStdString(), ui->landTbx->text().toStdString(),
+                    ui->plzTbx->text().toInt(), ui->strasseTbx->text().toStdString(), ui->emailTbx->text().toStdString(), ui->kommentarTbx->text().toStdString());
 
+    d.setKlassenmitglied(&km);
+    d.setOrganisator(&org);
+
+    DatenDAO *ddao = new QtDatenDAO();
+    ddao->insert(d);
+
+    KontaktDAO *kdao = new QtKontaktDAO();
+    for (auto &kontakt : kontaktList) {
+        kontakt->setDaten(&d);
+        kdao->insert(*kontakt);
+    }
+
+    loadData();
+
+    if (this->kv != nullptr) {
+        kv->init();
+    }
 }
 
 void ProfileView::abbBtnClick()
 {
-
+    this->close();
 }
 
 void ProfileView::pwAendernBtnClick()
 {
+    Organisator *o = new Organisator();
+    o->setId(this->km.getId());
 
+    OrganisatorDAO *odao = new QtOrganisatorDAO();
+    if (odao->search(*o)) {
+        ChangePasswortView *cv = new ChangePasswortView(*o, false);
+        cv->show();
+    }
 }
 
 void ProfileView::orgRechteBtnClick()
 {
-
+    OrganisatorDAO *odao = new QtOrganisatorDAO();
+    Organisator o;
+    o.setId(km.getId());
+    if (odao->search(o)) {
+        //ist Organisator
+        odao->remove(km.getId());
+    }
+    else {
+        //ist kein Organisator
+        odao->insert(o);
+    }
 }
 
 void ProfileView::kontakteBtnClick()
 {
+    KontaktView *kv = new KontaktView(this, kontaktList);
+    kv->show();
+}
 
+void ProfileView::onPrevBtnClick()
+{
+    if (this->listPos - 1 < 0) {
+        return;
+    }
+
+    this->listPos -=1;
+    ui->curPosLbl->setText(QString::number(this->listPos + 1));
+    initTbx(this->listPos);
+}
+
+void ProfileView::onNextBtnClick()
+{
+    if (this->listPos + 1 >= this->datenList.size()) {
+        return;
+    }
+
+    this->listPos += 1;
+    ui->curPosLbl->setText(QString::number(this->listPos + 1));
+    initTbx(this->listPos);
 }
 
 void ProfileView::initTbx(int listPos)
@@ -77,8 +192,15 @@ void ProfileView::initTbx(int listPos)
             ui->strasseTbx->setText(QString::fromStdString(daten->getStrasse()));
             ui->plzTbx->setText(QString::number(daten->getPlz()));
             ui->hausnummerTbx->setText(QString::number(daten->getHausnummer()));
+            ui->kommentarTbx->setText(QString::fromStdString(daten->getKommentar()));
 
+            this->kontaktList.clear();
+            KontaktDAO *kdao = new QtKontaktDAO();
+            Kontakt k = Kontakt();
+            k.setDaten(daten);
+            kdao->select(k, this->kontaktList);
             return;
         }
+        counter++;
     }
 }
