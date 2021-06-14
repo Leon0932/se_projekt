@@ -170,6 +170,49 @@ void createTestData() {
     d5.setKlassenmitglied(&mp);
     d5.setOrganisator(&km);
     ddao->insert(d5);
+
+    sleep_for(seconds(1));
+    Klassenmitglied sm = Klassenmitglied();
+    Daten d6 = Daten("Mayer", "Sven", "Müller", 2, "Aalen", "Deutschland", 54312, "aalstraße", "sven.mayer@htw-aalen.de", "Kommt mit Freundin.");
+    d6.setKlassenmitglied(&sm);
+    d6.setOrganisator(&km);
+    kdao->insert(sm);
+    ddao->insert(d6);
+
+    Klassenmitglied nb = Klassenmitglied();
+    Daten d7 = Daten("Banea", "Nikolas", "", 14, "Schwäbisch Gmünd", "Deutschland", 71325, "Schwabenstraße", "nikolas.banea@htw-aalen.de", "Kommt erst um 22:30 Uhr");
+    d7.setKlassenmitglied(&nb);
+    d7.setOrganisator(&mm);
+    kdao->insert(nb);
+    ddao->insert(d7);
+
+    Klassenmitglied jb = Klassenmitglied();
+    Daten d8 = Daten("Bäuml", "Julian", "", 22, "Stuttgart", "Deutschland", 84612, "Stuttgarterstraße", "julian.baeuml@htw-aalen.de", "Bringt Essen mit.");
+    d8.setKlassenmitglied(&jb);
+    d8.setOrganisator(&km);
+    kdao->insert(jb);
+    ddao->insert(d8);
+
+    Klassenmitglied ev = Klassenmitglied();
+    Daten d9 = Daten("Vogt", "Erwin", "", 42, "Mannheim", "Deutschland", 89123, "Mannstraße", "erwin_09@gmx.de", "");
+    d9.setKlassenmitglied(&ev);
+    d9.setOrganisator(&km);
+    kdao->insert(ev);
+    ddao->insert(d9);
+
+    Klassenmitglied mh = Klassenmitglied();
+    Daten d10 = Daten("Höfer", "Michelle", "", 1, "Freiburg", "Deutschland", 71234, "Freistraße", "michelle-hoefer@gmx.de", "Kommt mit Mann und Kind");
+    d10.setKlassenmitglied(&mh);
+    d10.setOrganisator(&mm);
+    kdao->insert(mh);
+    ddao->insert(d10);
+
+    Klassenmitglied ay = Klassenmitglied();
+    Daten d11 = Daten("Yildiz", "Abdullah", "", 5, "Westhausen", "Deutschland", 81345, "Weststraße", "abdullah.yildiz@htw-aalen.de", "Bringt Trinken mit.");
+    d11.setKlassenmitglied(&ay);
+    d11.setOrganisator(&mm);
+    kdao->insert(ay);
+    ddao->insert(d11);
 }
 
 int main(int argc, char *argv[])

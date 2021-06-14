@@ -6,6 +6,7 @@ QtHauptorganisatorDAO::QtHauptorganisatorDAO()
 {
     insert_qeury.prepare("INSERT INTO Hauptorganisator (org_id) VALUES (:org_id);");
     remove_query.prepare("DELETE FROM Hauptorganisator WHERE id = :org_id;");
+    search_query.prepare("SELECT * FROM Hauptorganisator WHERE org_id=:org_id");
     fetch_query.prepare("SELECT * FROM Hauptorganisator;");
     clean_query.prepare("DELETE FROM Hauptorganisator");
 }
@@ -36,6 +37,16 @@ bool QtHauptorganisatorDAO::fetch(Hauptorganisator &hauptorganisator)
     }
     hauptorganisator.setId(fetch_query.value(0).toInt());
     return true;
+}
+
+bool QtHauptorganisatorDAO::search(Hauptorganisator &hauptorganisator)
+{
+    search_query.bindValue(":org_id", hauptorganisator.getId());
+
+    if (!search_query.exec()) {
+        return false;
+    }
+    return search_query.next();
 }
 
 bool QtHauptorganisatorDAO::clean()

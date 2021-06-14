@@ -3,6 +3,8 @@
 
 #include <QWidget>
 
+#include "daten.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class LoginView; }
 QT_END_NAMESPACE
@@ -13,6 +15,7 @@ class LoginView : public QWidget
 
 public:
     LoginView(QWidget *parent = nullptr);
+    LoginView(Daten &d);
     ~LoginView();
 
 public slots:
@@ -21,5 +24,6 @@ public slots:
 
 private:
     Ui::LoginView *ui;
+    Daten d;
 };
 #endif // LOGINVIEW_H

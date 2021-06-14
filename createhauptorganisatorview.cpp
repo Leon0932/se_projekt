@@ -11,6 +11,8 @@
 #include "klassenmitglieddao.h"
 #include "qtklassenmitglieddao.h"
 
+#include "qtkontaktdao.h"
+
 #include "loginview.h"
 #include "kontaktview.h"
 #include "organisatordao.h"
@@ -25,6 +27,7 @@ CreateHauptorganisatorView::CreateHauptorganisatorView(QWidget *parent) :
     ui(new Ui::CreateHauptorganisatorView)
 {
     ui->setupUi(this);
+    this->setWindowTitle("SE Projekt Gruppe 10 - Hauptorganisator erstellen");
     connect(ui->kontakteBtn, SIGNAL(clicked(bool)), this, SLOT(onKontakteBtnClicked()));
     connect(ui->saveBtn, SIGNAL(clicked(bool)), this, SLOT(onSaveBtnClicked()));
     connect(ui->exitBtn, SIGNAL(clicked(bool)), this, SLOT(onExitBtnClicked()));
@@ -33,11 +36,14 @@ CreateHauptorganisatorView::CreateHauptorganisatorView(QWidget *parent) :
 CreateHauptorganisatorView::~CreateHauptorganisatorView()
 {
     delete ui;
+//    for (const auto& kontakt : this->kontaktList) {
+//        delete kontakt;
+//    }
 }
 
 void CreateHauptorganisatorView::onKontakteBtnClicked()
 {
-    KontaktView *kv = new KontaktView();
+    KontaktView *kv = new KontaktView(this, kontaktList);
     kv->show();
 }
 
@@ -72,6 +78,12 @@ void CreateHauptorganisatorView::onSaveBtnClicked()
         LoginView *lv = new LoginView();
         lv->show();
         this->close();
+    }
+
+    KontaktDAO *kodao = new QtKontaktDAO();
+    for (auto const& k : this->kontaktList) {
+        k->setDaten(&d);
+        kodao->insert(*k);
     }
 }
 

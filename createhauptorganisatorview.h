@@ -2,6 +2,10 @@
 #define CREATEHAUPTORGANISATORVIEW_H
 
 #include <QWidget>
+#include <list>
+using std::list;
+
+#include "kontakt.h"
 
 namespace Ui {
 class CreateHauptorganisatorView;
@@ -14,6 +18,7 @@ class CreateHauptorganisatorView : public QWidget
 public:
     explicit CreateHauptorganisatorView(QWidget *parent = nullptr);
     ~CreateHauptorganisatorView();
+    list<Kontakt*> kontaktList;
 
 public slots:
     void onKontakteBtnClicked();

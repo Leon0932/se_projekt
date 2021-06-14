@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>805</width>
-    <height>453</height>
+    <width>779</width>
+    <height>415</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,7 +18,7 @@
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
-       <widget class="QLabel" name="nameOrganisator">
+       <widget class="QLabel" name="usernameLbl">
         <property name="focusPolicy">
          <enum>Qt::NoFocus</enum>
         </property>
@@ -48,7 +48,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="rolleLabel">
+       <widget class="QLabel" name="rolleLbl">
         <property name="text">
          <string>Hauptorganisator</string>
         </property>
@@ -70,33 +70,53 @@
         <item>
          <layout class="QVBoxLayout" name="verticalLayout">
           <item>
-           <widget class="QPushButton" name="pushButton">
+           <spacer name="verticalSpacer_4">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="klBtn">
             <property name="text">
              <string>Klassenliste</string>
             </property>
             <property name="flat">
-             <bool>true</bool>
+             <bool>false</bool>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_2">
+           <widget class="QPushButton" name="addKmBtn">
+            <property name="styleSheet">
+             <string notr="true">margin-top: 15px;
+margin-bottom: 15px;</string>
+            </property>
             <property name="text">
              <string>Klassenmitglied
  hinzufügen</string>
             </property>
+            <property name="default">
+             <bool>false</bool>
+            </property>
             <property name="flat">
-             <bool>true</bool>
+             <bool>false</bool>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_3">
+           <widget class="QPushButton" name="meineDatenBtn">
             <property name="text">
              <string>Meine Daten</string>
             </property>
             <property name="flat">
-             <bool>true</bool>
+             <bool>false</bool>
             </property>
            </widget>
           </item>
@@ -146,7 +166,7 @@
            </widget>
           </item>
           <item row="1" column="1">
-           <widget class="QLineEdit" name="vornameEdit"/>
+           <widget class="QLineEdit" name="vnTbx"/>
           </item>
           <item row="2" column="0">
            <widget class="QLabel" name="label_3">
@@ -156,7 +176,7 @@
            </widget>
           </item>
           <item row="2" column="1">
-           <widget class="QLineEdit" name="lineEdit_2"/>
+           <widget class="QLineEdit" name="nnTbx"/>
           </item>
           <item row="3" column="0">
            <widget class="QLabel" name="label_4">
@@ -166,7 +186,7 @@
            </widget>
           </item>
           <item row="3" column="1">
-           <widget class="QLineEdit" name="lineEdit_3"/>
+           <widget class="QLineEdit" name="gnTbx"/>
           </item>
           <item row="4" column="0">
            <widget class="QLabel" name="label_5">
@@ -176,7 +196,7 @@
            </widget>
           </item>
           <item row="4" column="1">
-           <widget class="QLineEdit" name="lineEdit_4"/>
+           <widget class="QLineEdit" name="emTbx"/>
           </item>
           <item row="5" column="0">
            <widget class="QLabel" name="label_6">
@@ -186,7 +206,7 @@
            </widget>
           </item>
           <item row="5" column="1">
-           <widget class="QLineEdit" name="lineEdit_5"/>
+           <widget class="QLineEdit" name="laTbx"/>
           </item>
           <item row="6" column="0">
            <widget class="QLabel" name="label_7">
@@ -196,7 +216,7 @@
            </widget>
           </item>
           <item row="6" column="1">
-           <widget class="QLineEdit" name="lineEdit_6"/>
+           <widget class="QLineEdit" name="ortTbx"/>
           </item>
           <item row="7" column="0">
            <widget class="QLabel" name="label_8">
@@ -206,7 +226,7 @@
            </widget>
           </item>
           <item row="7" column="1">
-           <widget class="QLineEdit" name="lineEdit_7"/>
+           <widget class="QLineEdit" name="plzTbx"/>
           </item>
           <item row="8" column="0">
            <widget class="QLabel" name="label_9">
@@ -216,7 +236,7 @@
            </widget>
           </item>
           <item row="8" column="1">
-           <widget class="QLineEdit" name="lineEdit_8"/>
+           <widget class="QLineEdit" name="strTbx"/>
           </item>
           <item row="9" column="0">
            <widget class="QLabel" name="label_10">
@@ -226,7 +246,7 @@
            </widget>
           </item>
           <item row="9" column="1">
-           <widget class="QLineEdit" name="lineEdit_9"/>
+           <widget class="QLineEdit" name="hnrTbx"/>
           </item>
           <item row="0" column="1">
            <spacer name="verticalSpacer_2">
@@ -312,7 +332,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>805</width>
+     <width>779</width>
      <height>21</height>
     </rect>
    </property>

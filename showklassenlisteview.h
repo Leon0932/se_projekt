@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 
+#include "daten.h"
+
 namespace Ui {
 class ShowKlassenlisteView;
 }
@@ -13,18 +15,19 @@ class ShowKlassenlisteView : public QMainWindow
 
 public:
     explicit ShowKlassenlisteView(QWidget *parent = nullptr);
+    ShowKlassenlisteView(string email);
     ~ShowKlassenlisteView();
 
 public slots:
     void init();
-    void onTablerowClicked(int row, int col);
     void onTablerowDoubleClick(int row, int col);
     void onAusloggenBtnClicked();
     void onAddKlassenmitgliedLblClicked();
-    void onShowProfileLblClicked();
+    void onMeineDatenBtnClick();
 
 private:
     Ui::ShowKlassenlisteView *ui;
+    string email;
 };
 
 #endif // SHOWKLASSENLISTEVIEW_H

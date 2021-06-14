@@ -10,11 +10,29 @@ KontaktView::KontaktView(QWidget *parent) :
     ui(new Ui::KontaktView)
 {
     ui->setupUi(this);
+    this->setWindowTitle("SE Projekt Gruppe 10 - Kontakte hinzufügen");
     ui->tableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
     connect(ui->addBtn, SIGNAL(clicked(bool)), this, SLOT(onAddBtnClick()));
     connect(ui->remBtn, SIGNAL(clicked(bool)), this, SLOT(onRemBtnClick()));
     connect(ui->okBtn, SIGNAL(clicked(bool)), this, SLOT(onOkBtnClick()));
     connect(ui->abbBtn, SIGNAL(clicked(bool)), this, SLOT(onAbbBtnClick()));
+}
+
+KontaktView::KontaktView(CreateHauptorganisatorView *baseForm, list<Kontakt*> &kList) : KontaktView()
+{
+    this->baseForm = baseForm;
+    ui->tableWidget->setRowCount(kList.size());
+    qDebug() << kList.size();
+    int counter = 0;
+    for (auto const& kontakt : kList) {
+        QTableWidgetItem *vorwahlItem = new QTableWidgetItem(QString::fromStdString(kontakt->getVorwahl()));
+        QTableWidgetItem *nummerItem = new QTableWidgetItem(QString::fromStdString(kontakt->getNummer()));
+
+        ui->tableWidget->setItem(counter, 0, vorwahlItem);
+        ui->tableWidget->setItem(counter, 1, nummerItem);
+        counter++;
+    }
+    updateComboBox();
 }
 
 KontaktView::~KontaktView()
@@ -59,7 +77,20 @@ void KontaktView::onRemBtnClick()
 
 void KontaktView::onOkBtnClick()
 {
+    this->baseForm->kontaktList.clear();
+    int rows = ui->tableWidget->rowCount();
+    for (int i = 0; i < rows; i++) {
+        QTableWidgetItem *item = ui->tableWidget->item(i, 0);
+        string vorwahl = item->text().toStdString();
+        QTableWidgetItem *item2 = ui->tableWidget->item(i, 1);
+        string nummer = item2->text().toStdString();
 
+        Kontakt *k = new Kontakt();
+        k->setVorwahl(vorwahl);
+        k->setNummer(nummer);
+        this->baseForm->kontaktList.push_back(k);
+    }
+    this->close();
 }
 
 void KontaktView::onAbbBtnClick()

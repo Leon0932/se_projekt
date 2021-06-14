@@ -18,9 +18,12 @@
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_3">
       <item>
-       <widget class="QLabel" name="nameOrganisator_2">
+       <widget class="QLabel" name="usernameLbl">
         <property name="focusPolicy">
          <enum>Qt::NoFocus</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
         </property>
         <property name="text">
          <string>Max Mustermann</string>
@@ -48,7 +51,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="rolleLabel_4">
+       <widget class="QLabel" name="rolleLbl">
         <property name="text">
          <string>Hauptorganisator</string>
         </property>
@@ -57,27 +60,57 @@
      </layout>
     </item>
     <item>
+     <widget class="Line" name="line">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+    </item>
+    <item>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
        <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <spacer name="verticalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
         <item>
          <widget class="QPushButton" name="klassenlisteBtn">
           <property name="text">
            <string>Klassenliste</string>
           </property>
+          <property name="default">
+           <bool>false</bool>
+          </property>
           <property name="flat">
-           <bool>true</bool>
+           <bool>false</bool>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QPushButton" name="addKmBtn">
+          <property name="styleSheet">
+           <string notr="true">margin-top: 15px;
+margin-bottom: 15px;</string>
+          </property>
           <property name="text">
            <string>Klassenmitglied
  hinzufügen</string>
           </property>
+          <property name="autoDefault">
+           <bool>false</bool>
+          </property>
           <property name="flat">
-           <bool>true</bool>
+           <bool>false</bool>
           </property>
          </widget>
         </item>
@@ -86,8 +119,11 @@
           <property name="text">
            <string>Meine Daten</string>
           </property>
+          <property name="default">
+           <bool>false</bool>
+          </property>
           <property name="flat">
-           <bool>true</bool>
+           <bool>false</bool>
           </property>
          </widget>
         </item>
@@ -107,6 +143,13 @@
        </layout>
       </item>
       <item>
+       <widget class="Line" name="line_2">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QTableWidget" name="tableWidget">
         <column>
          <property name="text">
@@ -116,6 +159,46 @@
         <column>
          <property name="text">
           <string>Email</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Straße</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Neue Spalte</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Hausnummer</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Plz</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Ort</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Neue Spalte</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Land</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Kommentar</string>
          </property>
         </column>
        </widget>

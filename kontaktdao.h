@@ -6,6 +6,7 @@
 #include "kontakt.h"
 
 class KontaktDAO {
+public:
     virtual bool insert(Kontakt &kontakt) = 0;
     virtual bool update(Kontakt &kontakt) = 0;
     virtual bool remove(int id) = 0;
