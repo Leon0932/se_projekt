@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>887</width>
-    <height>565</height>
+    <width>456</width>
+    <height>484</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -32,7 +32,7 @@
      <item row="0" column="0">
       <widget class="QLabel" name="nachnameLbl">
        <property name="text">
-        <string>nachname</string>
+        <string>Nachname</string>
        </property>
       </widget>
      </item>
@@ -42,7 +42,7 @@
      <item row="1" column="0">
       <widget class="QLabel" name="vornameLbl">
        <property name="text">
-        <string>vorname</string>
+        <string>Vorname</string>
        </property>
       </widget>
      </item>
@@ -52,7 +52,7 @@
      <item row="2" column="0">
       <widget class="QLabel" name="geburtsnameLbl">
        <property name="text">
-        <string>geburtsname</string>
+        <string>Geburtsname</string>
        </property>
       </widget>
      </item>
@@ -62,7 +62,7 @@
      <item row="3" column="0">
       <widget class="QLabel" name="emailLbl">
        <property name="text">
-        <string>email</string>
+        <string>Email</string>
        </property>
       </widget>
      </item>
@@ -72,7 +72,7 @@
      <item row="4" column="0">
       <widget class="QLabel" name="landLbl">
        <property name="text">
-        <string>land</string>
+        <string>Land</string>
        </property>
       </widget>
      </item>
@@ -82,7 +82,7 @@
      <item row="5" column="0">
       <widget class="QLabel" name="plzLbl">
        <property name="text">
-        <string>plz</string>
+        <string>Plz</string>
        </property>
       </widget>
      </item>
@@ -92,7 +92,7 @@
      <item row="6" column="0">
       <widget class="QLabel" name="ortLbl">
        <property name="text">
-        <string>ort</string>
+        <string>Ort</string>
        </property>
       </widget>
      </item>
@@ -102,7 +102,7 @@
      <item row="7" column="0">
       <widget class="QLabel" name="strasseLbl">
        <property name="text">
-        <string>strasse</string>
+        <string>Straße</string>
        </property>
       </widget>
      </item>
@@ -112,7 +112,7 @@
      <item row="8" column="0">
       <widget class="QLabel" name="hausnummerLbl">
        <property name="text">
-        <string>hausnummer</string>
+        <string>Hausnummer</string>
        </property>
       </widget>
      </item>
@@ -122,12 +122,40 @@
      <item row="9" column="0">
       <widget class="QLabel" name="label">
        <property name="text">
-        <string>kommentar</string>
+        <string>Kommentar</string>
        </property>
       </widget>
      </item>
      <item row="9" column="1">
       <widget class="QLineEdit" name="kommentarTbx"/>
+     </item>
+     <item row="10" column="0">
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>Organisator</string>
+       </property>
+      </widget>
+     </item>
+     <item row="10" column="1">
+      <widget class="QLineEdit" name="orgTbx">
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="11" column="0">
+      <widget class="QLabel" name="label_5">
+       <property name="text">
+        <string>Hauptkontakt</string>
+       </property>
+      </widget>
+     </item>
+     <item row="11" column="1">
+      <widget class="QLineEdit" name="hautpkontaktTbx">
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>

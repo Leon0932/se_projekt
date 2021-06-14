@@ -3,6 +3,7 @@
 
 #include "qtdatendao.h"
 #include "qtkontaktdao.h"
+#include "qthauptorganisatordao.h"
 #include "kontaktview.h"
 #include "changepasswortview.h"
 
@@ -24,30 +25,10 @@ ProfileView::ProfileView(QWidget *parent) :
 
 ProfileView::ProfileView(std::string kmEmail, std::string orgEmail) : ProfileView()
 {
-//    DatenDAO *ddao = new QtDatenDAO();
-//    OrganisatorDAO *odao = new QtOrganisatorDAO();
-
-//    Daten orgDaten;
-//    orgDaten.setEmail(orgEmail);
-//    ddao->searchEmail(orgDaten);
-
-//    this->org.setId(orgDaten.getId());
-//    odao->search(this->org);
-
-//    Daten d;
-//    d.setEmail(kmEmail);
-//    ddao->searchEmail(d);
-//    this->km.setId(d.getKlassenmitglied()->getId());
-
-//    ddao->search(d, this->datenList);
-//    this->listPos = datenList.size() - 1;
-//    initTbx(this->listPos);
-
-//    ui->maxPosLbl->setText(QString::number(this->datenList.size()));
-//    ui->curPosLbl->setText(QString::number(this->listPos + 1));
     this->kmEmail = kmEmail;
     this->orgEmail = orgEmail;
     loadData();
+    checkPermissions();
 }
 
 ProfileView::~ProfileView()
@@ -87,6 +68,40 @@ void ProfileView::loadData()
     ui->curPosLbl->setText(QString::number(this->listPos + 1));
 }
 
+void ProfileView::checkPermissions()
+{
+    Hauptorganisator hauptorganisator;
+    hauptorganisator.setId(org.getId());
+    HauptorganisatorDAO *hdao = new QtHauptorganisatorDAO();
+    if (hdao->search(hauptorganisator)) {
+        //hat alle Rechte
+        return;
+    }
+
+    Organisator organisator;
+    organisator.setId(km.getId());
+    OrganisatorDAO *odao = new QtOrganisatorDAO();
+    if (odao->search(organisator) && (org.getId() != km.getId())) {
+        //km ist Organisator und Organisator nicht Hauptorganisator
+        ui->kontakteBtn->setEnabled(false);
+        ui->orgRechteBtn->setEnabled(false);
+        ui->pwAendernBtn->setEnabled(false);
+        ui->okBtn->setEnabled(false);
+        ui->uebernehmenBtn->setEnabled(false);
+
+        ui->nachnameTbx->setReadOnly(true);
+        ui->vornameTbx->setReadOnly(true);
+        ui->geburtsnameTbx->setReadOnly(true);
+        ui->emailTbx->setReadOnly(true);
+        ui->landTbx->setReadOnly(true);
+        ui->plzTbx->setReadOnly(true);
+        ui->ortTbx->setReadOnly(true);
+        ui->strasseTbx->setReadOnly(true);
+        ui->hausnummerTbx->setReadOnly(true);
+        ui->kommentarTbx->setReadOnly(true);
+    }
+}
+
 void ProfileView::onOkBtnClick()
 {
     onuebernehmenBtnClick();
@@ -111,9 +126,22 @@ void ProfileView::onuebernehmenBtnClick()
         kdao->insert(*kontakt);
     }
 
+    if (hauptKontaktPos != -1) {
+        int counter = 0;
+        for (auto& kontakt : kontaktList) {
+            if (counter == hauptKontaktPos) {
+                d.setHauptkontakt(kontakt);
+                break;
+            }
+            counter++;
+        }
+        bool update = ddao->updateHauptkontakt(d);
+        qDebug() << "update: " << update;
+    }
+
     loadData();
 
-    if (this->kv != nullptr) {
+    if (updateKlassenliste) {
         kv->init();
     }
 }
@@ -152,7 +180,7 @@ void ProfileView::orgRechteBtnClick()
 
 void ProfileView::kontakteBtnClick()
 {
-    KontaktView *kv = new KontaktView(this, kontaktList);
+    KontaktView *kv = new KontaktView(this, kontaktList, hauptKontaktPos);
     kv->show();
 }
 
@@ -169,7 +197,8 @@ void ProfileView::onPrevBtnClick()
 
 void ProfileView::onNextBtnClick()
 {
-    if (this->listPos + 1 >= this->datenList.size()) {
+    int size = datenList.size();
+    if (this->listPos + 1 >= size) {
         return;
     }
 
@@ -194,6 +223,17 @@ void ProfileView::initTbx(int listPos)
             ui->hausnummerTbx->setText(QString::number(daten->getHausnummer()));
             ui->kommentarTbx->setText(QString::fromStdString(daten->getKommentar()));
 
+            Daten orgDaten;
+            orgDaten.setKlassenmitglied(daten->getOrganisator());
+            DatenDAO *ddao = new QtDatenDAO();
+            ddao->select_newest(orgDaten);
+
+            ui->orgTbx->setText(QString::fromStdString(orgDaten.getName() + " " + orgDaten.getNachname()));
+            ui->hautpkontaktTbx->setText(QString::fromStdString(daten->getHauptkontakt()->getVorwahl() + "/" + daten->getHauptkontakt()->getNummer()));
+
+            Kontakt hk;
+            daten->getHauptkontakt();
+
             this->kontaktList.clear();
             KontaktDAO *kdao = new QtKontaktDAO();
             Kontakt k = Kontakt();
@@ -203,4 +243,9 @@ void ProfileView::initTbx(int listPos)
         }
         counter++;
     }
+}
+
+void ProfileView::setUpdateKlassenliste(bool newUpdateKlassenliste)
+{
+    updateKlassenliste = newUpdateKlassenliste;
 }

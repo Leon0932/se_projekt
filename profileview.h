@@ -24,6 +24,8 @@ public:
     ~ProfileView();
     void addKlassenlistView(ShowKlassenlisteView *kv);
     void loadData();
+    void checkPermissions();
+    void setUpdateKlassenliste(bool newUpdateKlassenliste);
 
 public slots:
     void onOkBtnClick();
@@ -41,11 +43,13 @@ private:
     std::list<Kontakt*> kontaktList;
     std::string kmEmail;
     std::string orgEmail;
+    int hauptKontaktPos = -1;
     Organisator org;
     Klassenmitglied km;
     ShowKlassenlisteView *kv;
     int listPos;
     void initTbx(int listPos);
+    bool updateKlassenliste = true;
 };
 
 #endif // PROFILEVIEW_H

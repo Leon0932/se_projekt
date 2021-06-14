@@ -158,22 +158,22 @@ margin-bottom: 15px;</string>
         </column>
         <column>
          <property name="text">
+          <string>Nachname</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Geburtsname</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
           <string>Email</string>
          </property>
         </column>
         <column>
          <property name="text">
-          <string>Straße</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>Neue Spalte</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>Hausnummer</string>
+          <string>Land</string>
          </property>
         </column>
         <column>
@@ -188,12 +188,12 @@ margin-bottom: 15px;</string>
         </column>
         <column>
          <property name="text">
-          <string>Neue Spalte</string>
+          <string>Straße</string>
          </property>
         </column>
         <column>
          <property name="text">
-          <string>Land</string>
+          <string>Hausnummer</string>
          </property>
         </column>
         <column>
@@ -237,7 +237,7 @@ margin-bottom: 15px;</string>
      <x>0</x>
      <y>0</y>
      <width>703</width>
-     <height>21</height>
+     <height>20</height>
     </rect>
    </property>
   </widget>

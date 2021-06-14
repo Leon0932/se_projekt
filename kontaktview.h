@@ -21,7 +21,9 @@ public:
     explicit KontaktView(QWidget *parent = nullptr);
     explicit KontaktView(CreateHauptorganisatorView *baseForm, list<Kontakt*> &kList);
     explicit KontaktView(AddKlassenmitgliedView *baseForm, list<Kontakt*> &kList);
+    explicit KontaktView(AddKlassenmitgliedView *baseForm, list<Kontakt*> &kList, int &hkPos);
     explicit KontaktView(ProfileView *baseForm, list<Kontakt*> &kList);
+    explicit KontaktView(ProfileView *baseForm, list<Kontakt*> &kList, int &hkPos);
     ~KontaktView();
 
 public slots:
@@ -35,6 +37,7 @@ private:
     CreateHauptorganisatorView *baseForm;
     AddKlassenmitgliedView *kmForm;
     ProfileView *profileView;
+    int *hauptkontaktPos;
     list<Kontakt*> *kList;
     void updateComboBox();
 };

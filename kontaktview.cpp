@@ -37,6 +37,7 @@ KontaktView::KontaktView(CreateHauptorganisatorView *baseForm, list<Kontakt*> &k
 KontaktView::KontaktView(AddKlassenmitgliedView *baseForm, list<Kontakt *> &kList) : KontaktView()
 {
     this->kmForm = baseForm;
+    this->kList = &kList;
     ui->tableWidget->setRowCount(kList.size());
     int counter = 0;
     for (auto const& kontakt : kList) {
@@ -48,6 +49,11 @@ KontaktView::KontaktView(AddKlassenmitgliedView *baseForm, list<Kontakt *> &kLis
         counter++;
     }
     updateComboBox();
+}
+
+KontaktView::KontaktView(AddKlassenmitgliedView *baseForm, list<Kontakt *> &kList, int &hkPos) : KontaktView(baseForm, kList)
+{
+    this->hauptkontaktPos = &hkPos;
 }
 
 KontaktView::KontaktView(ProfileView *baseForm, list<Kontakt *> &kList) : KontaktView()
@@ -65,6 +71,11 @@ KontaktView::KontaktView(ProfileView *baseForm, list<Kontakt *> &kList) : Kontak
         counter++;
     }
     updateComboBox();
+}
+
+KontaktView::KontaktView(ProfileView *baseForm, list<Kontakt *> &kList, int &hkPos) : KontaktView(baseForm, kList)
+{
+    this->hauptkontaktPos = &hkPos;
 }
 
 KontaktView::~KontaktView()
@@ -122,6 +133,8 @@ void KontaktView::onOkBtnClick()
         k->setNummer(nummer);
         this->kList->push_back(k);
     }
+    qDebug() << ui->comboBox->currentIndex();
+    *hauptkontaktPos = ui->comboBox->currentIndex();
     this->close();
 }
 

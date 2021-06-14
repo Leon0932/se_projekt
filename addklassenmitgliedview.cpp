@@ -22,6 +22,7 @@ AddKlassenmitgliedView::AddKlassenmitgliedView(QWidget *parent) :
     connect(ui->ausloggenButton, SIGNAL(clicked(bool)), this, SLOT(onAusloggenBtnClicked()));
     connect(ui->klBtn, SIGNAL(clicked(bool)), this, SLOT(onKlassenlisteBtnClicked()));
     connect(ui->meineDatenBtn, SIGNAL(clicked(bool)), this, SLOT(onMeineDatenBtnClicked()));
+    connect(ui->kontakteBtn, SIGNAL(clicked(bool)), this, SLOT(onKontakteBtnClicked()));
 }
 
 AddKlassenmitgliedView::AddKlassenmitgliedView(std::string nemail) : AddKlassenmitgliedView()
@@ -33,7 +34,7 @@ AddKlassenmitgliedView::AddKlassenmitgliedView(std::string nemail) : AddKlassenm
     ddao->searchEmail(d);
     ui->usernameLbl->setText(QString::fromStdString(d.getName() + " " + d.getNachname()));
 
-    Hauptorganisator h = Hauptorganisator();
+    Hauptorganisator h;
     h.setId(d.getId());
     HauptorganisatorDAO *hdao = new QtHauptorganisatorDAO();
     if (hdao->search(h)) {
@@ -67,6 +68,25 @@ void AddKlassenmitgliedView::onUebernehmenBtnClicked()
 
     ddao->insert(d);
 
+    KontaktDAO *kodao = new QtKontaktDAO();
+    for (auto &kontakt : kontaktList) {
+        kontakt->setDaten(&d);
+        kodao->insert(*kontakt);
+    }
+
+    if (hauptKontaktPos != -1) {
+        int counter = 0;
+        for (auto& kontakt : kontaktList) {
+            if (counter == hauptKontaktPos) {
+                d.setHauptkontakt(kontakt);
+                break;
+            }
+            counter++;
+        }
+        bool update = ddao->updateHauptkontakt(d);
+        qDebug() << "update: " << update;
+    }
+
     ShowKlassenlisteView *kv = new ShowKlassenlisteView(this->email);
     kv->show();
     this->close();
@@ -93,7 +113,7 @@ AddKlassenmitgliedView::~AddKlassenmitgliedView()
 
 void AddKlassenmitgliedView::onKontakteBtnClicked()
 {
-    KontaktView *kv = new KontaktView();
+    KontaktView *kv = new KontaktView(this, kontaktList, hauptKontaktPos);
     kv->show();
 }
 
@@ -108,5 +128,6 @@ void AddKlassenmitgliedView::onKlassenlisteBtnClicked()
 void AddKlassenmitgliedView::onMeineDatenBtnClicked()
 {
     ProfileView *pv = new ProfileView(email, email);
+    pv->setUpdateKlassenliste(false);
     pv->show();
 }

@@ -3,6 +3,9 @@
 
 #include <QMainWindow>
 #include <string>
+#include <list>
+#include "qtkontaktdao.h"
+
 using std::string;
 
 namespace Ui {
@@ -29,6 +32,8 @@ public slots:
 private:
     Ui::AddKlassenmitgliedView *ui;
     string email;
+    std::list<Kontakt*> kontaktList;
+    int hauptKontaktPos = -1;
 };
 
 #endif // ADDKLASSENMITGLIEDVIEW_H
