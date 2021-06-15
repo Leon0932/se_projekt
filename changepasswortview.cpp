@@ -4,6 +4,8 @@
 #include "showklassenlisteview.h"
 #include "qtdatendao.h"
 
+#include "QMessageBox"
+
 ChangePasswortView::ChangePasswortView(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ChangePasswortView)
@@ -29,6 +31,14 @@ void ChangePasswortView::onOkBtnClick()
 {
     string newPw = ui->newPwTbx->text().toStdString();
     string wdpPw = ui->wdPwTbx->text().toStdString();
+
+    if (newPw.empty() || wdpPw.empty()) {
+        QMessageBox *box = new QMessageBox();
+        box->setIcon(QMessageBox::Critical);
+        box->setText("Passwort eingeben!");
+        box->show();
+        return;
+    }
 
     if (newPw.compare("password") == 0) {
         qDebug() << "password kann nicht pw sein";
@@ -57,7 +67,7 @@ void ChangePasswortView::onOkBtnClick()
 
 void ChangePasswortView::onAbbBtnClick()
 {
-    LoginView *lv = new LoginView();
-    lv->show();
+//    LoginView *lv = new LoginView();
+//    lv->show();
     this->close();
 }

@@ -176,17 +176,29 @@ void ProfileView::pwAendernBtnClick()
 
 void ProfileView::orgRechteBtnClick()
 {
+    qDebug() << "pressed";
     OrganisatorDAO *odao = new QtOrganisatorDAO();
     Organisator o;
     o.setId(km.getId());
     if (odao->search(o)) {
         //ist Organisator
+        QMessageBox *box = new QMessageBox();
+        box->setIcon(QMessageBox::Information);
+        box->setWindowTitle("Info");
+        box->setText("Organisatorrechte entzogen");
+        box->show();
         odao->remove(km.getId());
     }
     else {
         //ist kein Organisator
+        QMessageBox *box = new QMessageBox();
+        box->setIcon(QMessageBox::Information);
+        box->setWindowTitle("Info");
+        box->setText("Organisatorrechte gegeben");
+        box->show();
         odao->insert(o);
     }
+    checkPermissions();
 }
 
 void ProfileView::kontakteBtnClick()

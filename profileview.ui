@@ -191,7 +191,7 @@
      <item>
       <widget class="QLabel" name="label_2">
        <property name="text">
-        <string>Position: </string>
+        <string>Änderungshistorie:</string>
        </property>
       </widget>
      </item>
