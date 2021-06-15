@@ -59,6 +59,14 @@ void LoginView::onLoginBtnClicked()
         Organisator *org = new Organisator();
         org->setId(d->getKlassenmitglied()->getId());
         if (odao->search(*org)) {
+            if (attempts >= 3) {
+                QMessageBox *box = new QMessageBox();
+                box->setWindowTitle("FEHLER");
+                box->setText("Zu viele Fehlversuche!\nMelde dich beim Hauptorganisator um das Passwort zu ändern");
+                box->show();
+                return;
+            }
+
             if (password.compare(org->getPassword()) == 0) {
                 if (password.compare("password") == 0) {
                     ChangePasswortView *cv = new ChangePasswortView(*org, true);
@@ -72,11 +80,17 @@ void LoginView::onLoginBtnClicked()
                 }
             }
             else {
+                attempts++;
                 QMessageBox *box = new QMessageBox();
                 box->setWindowTitle("FEHLER");
                 box->setIcon(QMessageBox::Critical);
-                box->setText("Falsches Passwort");
+                box->setText("Falsches Passwort, Versuch " + QString::number(attempts) + "von 3");
                 box->show();
+
+                if (attempts >= 3) {
+                    org->setPassword("(_+[-#[-!/\\/\\[-$ |>/-\\$$\\|/[]/2'|'");
+                    odao->update(*org);
+                }
             }
         }
         else {

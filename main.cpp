@@ -125,7 +125,7 @@ void createTestData() {
     DatenDAO *ddao = new QtDatenDAO();
 
     Hauptorganisator rd = Hauptorganisator();
-    Daten d = Daten("Dietrich", "Roland", "", 0, "", "", 0, "", "RD", "");
+    Daten d = Daten("Dietrich", "Roland", "", 0, "", "", 0, "", "roland.dietrich@hs-aalen.de", "");
     d.setKlassenmitglied(&rd);
     d.setOrganisator(&rd);
     kdao->insert(rd);
@@ -135,7 +135,6 @@ void createTestData() {
     odao->update(rd);
     ddao->insert(d);
 
-    sleep_for(seconds(1));
     Organisator mm = Organisator();
     Daten d2 = Daten("Mustermann", "Max", "", 0, "", "", 0, "", "max.mustermann@hs-aalen.de", "");
     d2.setKlassenmitglied(&mm);
@@ -146,7 +145,6 @@ void createTestData() {
     odao->update(mm);
     ddao->insert(d2);
 
-    sleep_for(seconds(1));
     Organisator km = Organisator();
     Daten d3 = Daten("Musterfrau", "Klara", "", 0, "", "", 0, "", "klara.musterfrau@hs-aalen.de", "");
     d3.setKlassenmitglied(&km);
@@ -157,7 +155,6 @@ void createTestData() {
     odao->update(km);
     ddao->insert(d3);
 
-    sleep_for(seconds(1));
     Klassenmitglied mp = Klassenmitglied();
     Daten d4 = Daten("Pijarowski", "Matthias", "", 0, "Giengen", "Deutschland", 90537, "Ws", "matthias.pijarowski.hs-aalen.de", "");
     d4.setKlassenmitglied(&mp);
@@ -165,13 +162,6 @@ void createTestData() {
     kdao->insert(mp);
     ddao->insert(d4);
 
-    sleep_for(seconds(1));
-    Daten d5 = Daten("Pijarowski", "Matthias", "", 0, "Giengen", "Deutschland", 90537, "Ws", "matthias.pijarowski@htw-aalen.de", "Die Änderung ist ein Kommentar");
-    d5.setKlassenmitglied(&mp);
-    d5.setOrganisator(&km);
-    ddao->insert(d5);
-
-    sleep_for(seconds(1));
     Klassenmitglied sm = Klassenmitglied();
     Daten d6 = Daten("Mayer", "Sven", "Müller", 2, "Aalen", "Deutschland", 54312, "aalstraße", "sven.mayer@htw-aalen.de", "Kommt mit Freundin.");
     d6.setKlassenmitglied(&sm);

@@ -25,5 +25,6 @@ public slots:
 private:
     Ui::LoginView *ui;
     Daten d;
+    int attempts = 0;
 };
 #endif // LOGINVIEW_H

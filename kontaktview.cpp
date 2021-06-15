@@ -21,6 +21,7 @@ KontaktView::KontaktView(QWidget *parent) :
 KontaktView::KontaktView(CreateHauptorganisatorView *baseForm, list<Kontakt*> &kList) : KontaktView()
 {
     this->baseForm = baseForm;
+    this->kList = &kList;
     ui->tableWidget->setRowCount(kList.size());
     int counter = 0;
     for (auto const& kontakt : kList) {
@@ -32,6 +33,11 @@ KontaktView::KontaktView(CreateHauptorganisatorView *baseForm, list<Kontakt*> &k
         counter++;
     }
     updateComboBox();
+}
+
+KontaktView::KontaktView(CreateHauptorganisatorView *baseForm, list<Kontakt *> &kList, int &hkPos) : KontaktView(baseForm, kList)
+{
+    this->hauptkontaktPos = &hkPos;
 }
 
 KontaktView::KontaktView(AddKlassenmitgliedView *baseForm, list<Kontakt *> &kList) : KontaktView()
@@ -112,7 +118,6 @@ void KontaktView::onRemBtnClick()
         return;
     }
     QModelIndex selectedRow = select->selectedRows().at(0);
-    qDebug() << selectedRow;
     ui->tableWidget->removeRow(selectedRow.row());
 
     updateComboBox();
@@ -133,7 +138,6 @@ void KontaktView::onOkBtnClick()
         k->setNummer(nummer);
         this->kList->push_back(k);
     }
-    qDebug() << ui->comboBox->currentIndex();
     *hauptkontaktPos = ui->comboBox->currentIndex();
     this->close();
 }

@@ -20,6 +20,7 @@ class KontaktView : public QWidget
 public:
     explicit KontaktView(QWidget *parent = nullptr);
     explicit KontaktView(CreateHauptorganisatorView *baseForm, list<Kontakt*> &kList);
+    explicit KontaktView(CreateHauptorganisatorView *baseForm, list<Kontakt*> &kList, int &hkPos);
     explicit KontaktView(AddKlassenmitgliedView *baseForm, list<Kontakt*> &kList);
     explicit KontaktView(AddKlassenmitgliedView *baseForm, list<Kontakt*> &kList, int &hkPos);
     explicit KontaktView(ProfileView *baseForm, list<Kontakt*> &kList);

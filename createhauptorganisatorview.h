@@ -18,7 +18,6 @@ class CreateHauptorganisatorView : public QWidget
 public:
     explicit CreateHauptorganisatorView(QWidget *parent = nullptr);
     ~CreateHauptorganisatorView();
-    list<Kontakt*> kontaktList;
 
 public slots:
     void onKontakteBtnClicked();
@@ -27,6 +26,8 @@ public slots:
 
 private:
     Ui::CreateHauptorganisatorView *ui;
+    list<Kontakt*> kontaktList;
+    int hauptKontaktPos = -1;
 };
 
 #endif // CREATEHAUPTORGANISATORVIEW_H

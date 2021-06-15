@@ -36,14 +36,11 @@ CreateHauptorganisatorView::CreateHauptorganisatorView(QWidget *parent) :
 CreateHauptorganisatorView::~CreateHauptorganisatorView()
 {
     delete ui;
-//    for (const auto& kontakt : this->kontaktList) {
-//        delete kontakt;
-//    }
 }
 
 void CreateHauptorganisatorView::onKontakteBtnClicked()
 {
-    KontaktView *kv = new KontaktView(this, kontaktList);
+    KontaktView *kv = new KontaktView(this, kontaktList, hauptKontaktPos);
     kv->show();
 }
 
@@ -84,6 +81,18 @@ void CreateHauptorganisatorView::onSaveBtnClicked()
     for (auto const& k : this->kontaktList) {
         k->setDaten(&d);
         kodao->insert(*k);
+    }
+
+    if (hauptKontaktPos != -1) {
+        int counter = 0;
+        for (auto& kontakt : kontaktList) {
+            if (counter == hauptKontaktPos) {
+                d.setHauptkontakt(kontakt);
+                break;
+            }
+            counter++;
+        }
+        ddao->updateHauptkontakt(d);
     }
 }
 
