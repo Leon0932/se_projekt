@@ -4,6 +4,8 @@
 #include "datendao.h"
 #include "qtdatendao.h"
 
+#include "QMessageBox"
+
 #include "hauptorganisatordao.h"
 #include "qthauptorganisatordao.h"
 #include "hauptorganisator.h"
@@ -55,6 +57,15 @@ void CreateHauptorganisatorView::onSaveBtnClicked()
     string ort = ui->ortTbx->text().toStdString();
     string strasse = ui->strasseTbx->text().toStdString();
     int hnr = ui->hausnummerTbx->text().toInt();
+
+    if (email.empty()) {
+        QMessageBox *box = new QMessageBox();
+        box->setIcon(QMessageBox::Critical);
+        box->setWindowTitle("FEHLER");
+        box->setText("Email Adresse darf nicht leer sein");
+        box->show();
+        return;
+    }
 
     Hauptorganisator hr = Hauptorganisator();
 

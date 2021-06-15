@@ -1,6 +1,8 @@
 #include "addklassenmitgliedview.h"
 #include "ui_addklassenmitgliedview.h"
 
+#include "QMessageBox"
+
 #include "showklassenlisteview.h"
 #include "kontaktview.h"
 #include "loginview.h"
@@ -47,6 +49,15 @@ AddKlassenmitgliedView::AddKlassenmitgliedView(std::string nemail) : AddKlassenm
 
 void AddKlassenmitgliedView::onUebernehmenBtnClicked()
 {
+    if (email.empty()) {
+        QMessageBox *box = new QMessageBox();
+        box->setIcon(QMessageBox::Critical);
+        box->setWindowTitle("FEHLER");
+        box->setText("Email Adresse darf nicht leer sein");
+        box->show();
+        return;
+    }
+
     Daten d = Daten(ui->nnTbx->text().toStdString(), ui->vnTbx->text().toStdString(), ui->gnTbx->text().toStdString(), ui->hnrTbx->text().toInt(),
                     ui->ortTbx->text().toStdString(), ui->laTbx->text().toStdString(), ui->plzTbx->text().toInt(), ui->strTbx->text().toStdString(),
                     ui->emTbx->text().toStdString(), "");

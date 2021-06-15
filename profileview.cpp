@@ -7,6 +7,8 @@
 #include "kontaktview.h"
 #include "changepasswortview.h"
 
+#include "QMessageBox"
+
 ProfileView::ProfileView(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ProfileView)
@@ -110,6 +112,15 @@ void ProfileView::onOkBtnClick()
 
 void ProfileView::onuebernehmenBtnClick()
 {
+    if (ui->emailTbx->text().isEmpty()) {
+        QMessageBox *box = new QMessageBox();
+        box->setIcon(QMessageBox::Critical);
+        box->setWindowTitle("FEHLER");
+        box->setText("Email Adresse darf nicht leer sein");
+        box->show();
+        return;
+    }
+
     Daten d = Daten(ui->nachnameTbx->text().toStdString(), ui->vornameTbx->text().toStdString(), ui->geburtsnameTbx->text().toStdString(),
                     ui->hausnummerTbx->text().toInt(), ui->ortTbx->text().toStdString(), ui->landTbx->text().toStdString(),
                     ui->plzTbx->text().toInt(), ui->strasseTbx->text().toStdString(), ui->emailTbx->text().toStdString(), ui->kommentarTbx->text().toStdString());
