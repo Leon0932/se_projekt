@@ -2,6 +2,7 @@
 #include "ui_changepasswortview.h"
 #include "loginview.h"
 #include "showklassenlisteview.h"
+#include "qtdatendao.h"
 
 ChangePasswortView::ChangePasswortView(QWidget *parent) :
     QWidget(parent),
@@ -44,7 +45,11 @@ void ChangePasswortView::onOkBtnClick()
     }
 
     if (this->openKlassenView) {
-        ShowKlassenlisteView *kv = new ShowKlassenlisteView();
+        DatenDAO *ddao = new QtDatenDAO();
+        Daten d;
+        d.setKlassenmitglied(this->org);
+        ddao->select_newest(d);
+        ShowKlassenlisteView *kv = new ShowKlassenlisteView(d.getEmail());
         kv->show();
     }
     this->close();
