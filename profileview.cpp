@@ -4,6 +4,7 @@
 #include "qtdatendao.h"
 #include "qtkontaktdao.h"
 #include "qthauptorganisatordao.h"
+#include "qtorganisatordao.h"
 #include "kontaktview.h"
 #include "changepasswortview.h"
 
@@ -49,6 +50,7 @@ void ProfileView::loadData()
 
     DatenDAO *ddao = new QtDatenDAO();
     OrganisatorDAO *odao = new QtOrganisatorDAO();
+    HauptorganisatorDAO *hdao = new QtHauptorganisatorDAO();
 
     Daten orgDaten;
     orgDaten.setEmail(orgEmail);
@@ -68,6 +70,23 @@ void ProfileView::loadData()
 
     ui->maxPosLbl->setText(QString::number(this->datenList.size()));
     ui->curPosLbl->setText(QString::number(this->listPos + 1));
+
+
+    Hauptorganisator haupto;
+    haupto.setId(this->km.getId());
+    if (hdao->search(haupto)) {
+        ui->rollenLbl->setText("Hauptorganisator");
+    }
+    else {
+        Organisator organi;
+        organi.setId(this->km.getId());
+        if (odao->search(organi)) {
+            ui->rollenLbl->setText("Organisator");
+        }
+        else {
+            ui->rollenLbl->setText("Klassenmitglied");
+        }
+    }
 }
 
 void ProfileView::checkPermissions()
@@ -101,7 +120,9 @@ void ProfileView::checkPermissions()
         ui->strasseTbx->setReadOnly(true);
         ui->hausnummerTbx->setReadOnly(true);
         ui->kommentarTbx->setReadOnly(true);
+        return;
     }
+
 }
 
 void ProfileView::onOkBtnClick()
@@ -199,6 +220,7 @@ void ProfileView::orgRechteBtnClick()
         odao->insert(o);
     }
     checkPermissions();
+    loadData();
 }
 
 void ProfileView::kontakteBtnClick()

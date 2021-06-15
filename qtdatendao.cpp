@@ -16,7 +16,7 @@ QtDatenDAO::QtDatenDAO()
     search_query.prepare("SELECT * FROM Daten WHERE km_id=:km_id");
     search_email_query.prepare("SELECT * FROM Daten WHERE email=:email");
     select_newest_query.prepare("SELECT * FROM Daten d1 WHERE km_id=:km_id AND zeitpunkt = (SELECT max(zeitpunkt) FROM Daten d2 WHERE d1.km_id=d2.km_id);");
-    select_query.prepare("SELECT * FROM Daten d1 WHERE zeitpunkt = (SELECT max(zeitpunkt) FROM Daten d2 WHERE d1.km_id = d2.km_id);");
+    select_query.prepare("SELECT * FROM Daten d1 WHERE zeitpunkt = (SELECT max(zeitpunkt) FROM Daten d2 WHERE d1.km_id = d2.km_id) ORDER BY name, nachname;");
     clean_query.prepare("DELETE FROM Daten");
 }
 
