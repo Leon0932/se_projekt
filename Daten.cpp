@@ -145,6 +145,7 @@ Daten::Daten()
 
 }
 
+//Konstruktor, welcher ein Objekt der Klasse erstellt und die Klassenattribute anhand der Parameter setzt
 Daten::Daten(string nachname, string vorname, string geburtsname, int hausnummer, string ort, string land, int plz, string strasse, string email, string kommentar)
 {
     this->nachname = nachname;

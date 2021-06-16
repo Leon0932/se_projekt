@@ -8,12 +8,18 @@
 class QtHauptorganisatorDAO : public HauptorganisatorDAO
 {
 private:
-    QSqlQuery insert_qeury, search_query, fetch_query;
+    //DML = Insert
+    //DQL = Search, Fetch
+    QSqlQuery insert_query, search_query, fetch_query;
 
 public:
+    //class definition
     QtHauptorganisatorDAO();
+    //insert hauptorganisator
     bool insert(Hauptorganisator &hauptorganisator) override;
+    //fetch hauptorganisator
     bool fetch(Hauptorganisator &hauptorganisator) override;
+    //search hauptorganisator
     bool search(Hauptorganisator &hauptorganisator) override;
 };
 

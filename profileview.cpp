@@ -10,6 +10,7 @@
 
 #include "QMessageBox"
 
+//Hauptkonstruktor welcher den Titel des Fensters setzt und die Signals der Buttons mit den Slots verbindet
 ProfileView::ProfileView(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ProfileView)
@@ -26,6 +27,7 @@ ProfileView::ProfileView(QWidget *parent) :
     connect(ui->prevBtn, SIGNAL(clicked(bool)), this, SLOT(onPrevBtnClick()));
 }
 
+//konstruktor setzt emails und läd daten und überprüft Rechte
 ProfileView::ProfileView(std::string kmEmail, std::string orgEmail) : ProfileView()
 {
     this->kmEmail = kmEmail;
@@ -39,11 +41,13 @@ ProfileView::~ProfileView()
     delete ui;
 }
 
+//fügt Referenz auf die KlassenlistView hinzu
 void ProfileView::addKlassenlistView(ShowKlassenlisteView *kv)
 {
     this->kv = kv;
 }
 
+//läd die Daten eines Klassenmitglieds
 void ProfileView::loadData()
 {
     this->datenList.clear();
@@ -89,6 +93,7 @@ void ProfileView::loadData()
     }
 }
 
+//überprüft die Rechte und enabled/disabled die Textboxen/Buttons entsprechen
 void ProfileView::checkPermissions()
 {
     Hauptorganisator hauptorganisator;
@@ -125,12 +130,15 @@ void ProfileView::checkPermissions()
 
 }
 
+//übernimmt Daten und schließt das Fenster
 void ProfileView::onOkBtnClick()
 {
     onuebernehmenBtnClick();
     this->close();
 }
 
+//Übernimmt die Daten, erstellt also ein neues Objekt, aktualisiert die Klassenliste
+//und aktualisiert die Änderungshistorie
 void ProfileView::onuebernehmenBtnClick()
 {
     if (ui->emailTbx->text().isEmpty()) {
@@ -178,11 +186,13 @@ void ProfileView::onuebernehmenBtnClick()
     }
 }
 
+//schließt das Fenster
 void ProfileView::abbBtnClick()
 {
     this->close();
 }
 
+//ändert das Passwort, falls die Person ein Organisator ist
 void ProfileView::pwAendernBtnClick()
 {
     Organisator *o = new Organisator();
@@ -195,9 +205,9 @@ void ProfileView::pwAendernBtnClick()
     }
 }
 
+//setzt/entfernt Organisatorrechte
 void ProfileView::orgRechteBtnClick()
 {
-    qDebug() << "pressed";
     OrganisatorDAO *odao = new QtOrganisatorDAO();
     Organisator o;
     o.setId(km.getId());
@@ -223,12 +233,14 @@ void ProfileView::orgRechteBtnClick()
     loadData();
 }
 
+//Zeigt die Kontakte des aktuellen Datensatzes
 void ProfileView::kontakteBtnClick()
 {
     KontaktView *kv = new KontaktView(kontaktList, hauptKontaktPos);
     kv->show();
 }
 
+//springt in der Historie zurück
 void ProfileView::onPrevBtnClick()
 {
     if (this->listPos - 1 < 0) {
@@ -240,6 +252,7 @@ void ProfileView::onPrevBtnClick()
     initTbx(this->listPos);
 }
 
+//springt in der Historie nach vorne
 void ProfileView::onNextBtnClick()
 {
     int size = datenList.size();
@@ -252,6 +265,7 @@ void ProfileView::onNextBtnClick()
     initTbx(this->listPos);
 }
 
+//setzt die Textboxen entprechen der Position in der Liste der Daten
 void ProfileView::initTbx(int listPos)
 {
     int counter = 0;
@@ -290,6 +304,7 @@ void ProfileView::initTbx(int listPos)
     }
 }
 
+//setzt das Attribut ob die Klassenliste upgedatet werden soll
 void ProfileView::setUpdateKlassenliste(bool newUpdateKlassenliste)
 {
     updateKlassenliste = newUpdateKlassenliste;

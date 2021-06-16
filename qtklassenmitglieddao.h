@@ -8,10 +8,13 @@
 class QtKlassenmitgliedDAO : public KlassenmitgliedDAO
 {
 private:
+    //create insert
     QSqlQuery insert_query;
 
 public:
+    //class definition
     QtKlassenmitgliedDAO();
+    //insert klassenmitglied
     bool insert(Klassenmitglied &km) override;
 };
 

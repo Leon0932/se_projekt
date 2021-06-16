@@ -20,18 +20,9 @@ class KontaktView : public QWidget
 
 public:
     explicit KontaktView(QWidget *parent = nullptr);
-<<<<<<< HEAD
-    //Konstruktoren mit der ursprünglichen View, Adresse der Liste und Position
-    explicit KontaktView(CreateHauptorganisatorView *baseForm, list<Kontakt*> &kList);
-    explicit KontaktView(CreateHauptorganisatorView *baseForm, list<Kontakt*> &kList, int &hkPos);
-    explicit KontaktView(AddKlassenmitgliedView *baseForm, list<Kontakt*> &kList);
-    explicit KontaktView(AddKlassenmitgliedView *baseForm, list<Kontakt*> &kList, int &hkPos);
-    explicit KontaktView(ProfileView *baseForm, list<Kontakt*> &kList);
-    explicit KontaktView(ProfileView *baseForm, list<Kontakt*> &kList, int &hkPos);
-=======
+    //Konstruktoren mit Adresse der Liste und Position
     explicit KontaktView(list<Kontakt*> &kList);
     explicit KontaktView(list<Kontakt*> &kList, int &hkPos);
->>>>>>> kontaktviewupdate
     ~KontaktView();
 
 public slots:
@@ -43,14 +34,7 @@ public slots:
 
 private:
     Ui::KontaktView *ui;
-<<<<<<< HEAD
-    //Views von denen man kommt
-    CreateHauptorganisatorView *baseForm;
-    AddKlassenmitgliedView *kmForm;
-    ProfileView *profileView;
     //Zeiger auf Position der Hauptkontakts in der Liste
-=======
->>>>>>> kontaktviewupdate
     int *hauptkontaktPos;
     //Zeiger auf Liste mit Kontakten
     list<Kontakt*> *kList;

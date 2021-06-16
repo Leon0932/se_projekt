@@ -5,6 +5,7 @@
 #include <string>
 using std::string;
 
+//Konstruktor der Fenstertitel setzt und Signals mit Slots verbindet
 KontaktView::KontaktView(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::KontaktView)
@@ -18,6 +19,7 @@ KontaktView::KontaktView(QWidget *parent) :
     connect(ui->abbBtn, SIGNAL(clicked(bool)), this, SLOT(onAbbBtnClick()));
 }
 
+//Konstruktor der wenn vorhanden die Kontakte aus der Liste in der Listview anzeigt
 KontaktView::KontaktView(list<Kontakt*> &kList) : KontaktView()
 {
     this->kList = &kList;
@@ -34,6 +36,7 @@ KontaktView::KontaktView(list<Kontakt*> &kList) : KontaktView()
     updateComboBox();
 }
 
+//Konstruktor der auch den Zeiger setzt
 KontaktView::KontaktView(list<Kontakt *> &kList, int &hkPos) : KontaktView(kList)
 {
     this->hauptkontaktPos = &hkPos;
@@ -44,6 +47,7 @@ KontaktView::~KontaktView()
     delete ui;
 }
 
+//fügt die Daten aus den textboxen der Liste hinzu
 void KontaktView::onAddBtnClick()
 {
     string vorwahl = ui->vorwahlTbx->text().toStdString();
@@ -65,6 +69,7 @@ void KontaktView::onAddBtnClick()
     updateComboBox();
 }
 
+//entfernt einen eintrag aus der Listview
 void KontaktView::onRemBtnClick()
 {
     QItemSelectionModel *select = ui->tableWidget->selectionModel();
@@ -78,6 +83,7 @@ void KontaktView::onRemBtnClick()
     updateComboBox();
 }
 
+//übernimmt die Kontakte aus der Listview in die Liste, welche der Klasse übergeben wurde und setzt den Zeiger auf den Hauptkontakt
 void KontaktView::onOkBtnClick()
 {
     this->kList->clear();
@@ -97,11 +103,13 @@ void KontaktView::onOkBtnClick()
     this->close();
 }
 
+//schließt das Fenster
 void KontaktView::onAbbBtnClick()
 {
     this->close();
 }
 
+//updated die Combobox damit nur Kontakte aus der Liste angezeigt werden
 void KontaktView::updateComboBox()
 {
     ui->comboBox->clear();

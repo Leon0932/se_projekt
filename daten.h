@@ -12,6 +12,7 @@ using namespace std;
 class Daten
 {
 private:
+    //Personbezogene Daten
     string nachname;
     string name;
     string geburtsname;
@@ -23,17 +24,19 @@ private:
     string email;
     string kommentar;
     string timestamp;
-    int id;
+    int id;    //Person-ID
 
-    Kontakt *hauptkontakt;
-    Klassenmitglied *klassenmitglied;
-    Organisator *organisator;
+    Kontakt *hauptkontakt;      //Definition von Kontakt-Objekt
+    Klassenmitglied *klassenmitglied;   //Definition von Klassenmitglied-Objekt
+    Organisator *organisator;       //Definition von Organisator-Objekt
 
 public:
-    Daten();
+    Daten();        //Konstruktor, welcher ein leeres Objekt erstellt
+    //Konstruktor der Klasse Daten mit allen personbezogenen Informationen
     Daten(string nachname, string vorname, string geburtsname, int hausnummer, string ort, string land,
           int plz, string strasse, string email, string kommentar);
-    ~Daten();
+    ~Daten();       //Dekonstruktor
+    //Folgende Methoden sind alle Getter bzw. Setter-Methoden fÃ¼r alle personenbezogenen Informationen
     int getId() const;
     void setId(int newId);
     const string &getNachname() const;

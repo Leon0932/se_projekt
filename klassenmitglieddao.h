@@ -6,7 +6,9 @@
 class KlassenmitgliedDAO
 {
 public:
+    //destructor for class
     virtual ~KlassenmitgliedDAO() {}
+    //interface insert reference to km
     virtual bool insert(Klassenmitglied &km) = 0;
 };
 

@@ -16,6 +16,7 @@ Organisator::Organisator()
 
 }
 
+//Erstellt Objekt von Organisator und setzt das Passwort anhand des Parameters
 Organisator::Organisator(int id, std::string password) : Klassenmitglied(id)
 {
     this->password = password;

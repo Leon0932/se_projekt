@@ -17,6 +17,7 @@
 
 using std::string;
 
+//Huptkonstruktor welcher den Titel des Fensters setzt und die Signals der Buttons mit den Slots verbindet
 LoginView::LoginView(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::LoginView)
@@ -27,6 +28,7 @@ LoginView::LoginView(QWidget *parent)
     connect(ui->exitBtn, SIGNAL(clicked(bool)), this, SLOT(onExitBtnClicked()));
 }
 
+//Setzt das Datenobjekt der Klasse
 LoginView::LoginView(Daten &d) : LoginView()
 {
     this->d = d;
@@ -37,6 +39,8 @@ LoginView::~LoginView()
     delete ui;
 }
 
+//Prüft, ob die Email zu einem Organisator gehört und ob das Passwort korrekt ist
+//Sollte man sich zum ersten mal anmelden, wird außerdem die ChangepasswordView geöffnet
 void LoginView::onLoginBtnClicked()
 {
     string email = ui->emailTbx->text().toStdString();
@@ -110,6 +114,7 @@ void LoginView::onLoginBtnClicked()
     }
 }
 
+//schließt das Fenster
 void LoginView::onExitBtnClicked()
 {
     QCoreApplication::quit();

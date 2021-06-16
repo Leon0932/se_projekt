@@ -13,6 +13,8 @@
 #include <list>
 using std::list;
 
+//Huptkonstruktor welcher den Titel des Fensters setzt und die Signals der Buttons mit den Slots verbindet
+//außerdem wird die Table noch geupdatet, dass nur z.B. eine Reihe ausgewählt werden kann
 ShowKlassenlisteView::ShowKlassenlisteView(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::ShowKlassenlisteView)
@@ -30,6 +32,7 @@ ShowKlassenlisteView::ShowKlassenlisteView(QWidget *parent) :
     init();
 }
 
+//setzt außerdem die Labels für den aktuell angemeldeten Organisator
 ShowKlassenlisteView::ShowKlassenlisteView(string nemail) : ShowKlassenlisteView()
 {
     email = nemail;
@@ -56,6 +59,7 @@ ShowKlassenlisteView::~ShowKlassenlisteView()
     delete ui;
 }
 
+//Setzt die Items der Table
 void ShowKlassenlisteView::init()
 {
     Daten d;
@@ -95,6 +99,7 @@ void ShowKlassenlisteView::init()
     }
 }
 
+//zeigt das Profil der angeklickten Person in der Table
 void ShowKlassenlisteView::onTablerowDoubleClick(int row, int col)
 {
     string email = ui->tableWidget->item(row, 3)->text().toStdString();
@@ -103,6 +108,7 @@ void ShowKlassenlisteView::onTablerowDoubleClick(int row, int col)
     pv->show();
 }
 
+//Zeigt das Login Fenster
 void ShowKlassenlisteView::onAusloggenBtnClicked()
 {
     LoginView *lv = new LoginView();
@@ -110,6 +116,7 @@ void ShowKlassenlisteView::onAusloggenBtnClicked()
     this->close();
 }
 
+//Zeigt das Fenster um ein Klassenmitglied hinzuzufügen
 void ShowKlassenlisteView::onAddKlassenmitgliedLblClicked()
 {
     AddKlassenmitgliedView *addView = new AddKlassenmitgliedView(email);
@@ -117,6 +124,7 @@ void ShowKlassenlisteView::onAddKlassenmitgliedLblClicked()
     this->close();
 }
 
+//Zeigt die Daten des aktuell angemeldeten Organisators an
 void ShowKlassenlisteView::onMeineDatenBtnClick()
 {
     ProfileView *pv = new ProfileView(email, this->email);

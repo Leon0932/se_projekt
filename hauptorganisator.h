@@ -8,7 +8,9 @@
 class Hauptorganisator: public Organisator
 {
 public:
+    //Konstruktor, welcher leeres Objekt erstellt
     Hauptorganisator();
+    //Konstruktor, welcher ein Objekt mit eine ID sowie ein Passwort erstellt
     Hauptorganisator(int id, std::string password);
 };
 
