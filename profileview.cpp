@@ -225,7 +225,7 @@ void ProfileView::orgRechteBtnClick()
 
 void ProfileView::kontakteBtnClick()
 {
-    KontaktView *kv = new KontaktView(this, kontaktList, hauptKontaktPos);
+    KontaktView *kv = new KontaktView(kontaktList, hauptKontaktPos);
     kv->show();
 }
 

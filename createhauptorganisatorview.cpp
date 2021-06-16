@@ -24,6 +24,7 @@
 #include <string>
 using std::string;
 
+//Standardkonstruktor um den Fenstertitel zu setzen und die Signals und die Slots zu verbinden
 CreateHauptorganisatorView::CreateHauptorganisatorView(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::CreateHauptorganisatorView)
@@ -40,12 +41,14 @@ CreateHauptorganisatorView::~CreateHauptorganisatorView()
     delete ui;
 }
 
+//öffnet das Kontakte Fenster
 void CreateHauptorganisatorView::onKontakteBtnClicked()
 {
-    KontaktView *kv = new KontaktView(this, kontaktList, hauptKontaktPos);
+    KontaktView *kv = new KontaktView(kontaktList, hauptKontaktPos);
     kv->show();
 }
 
+//überprüft ob das email Feld leer ist, wenn nicht wird der Hauptorganisator und seine Daten usw. angelegt
 void CreateHauptorganisatorView::onSaveBtnClicked()
 {
     string name = ui->vornameTbx->text().toStdString();
@@ -107,6 +110,7 @@ void CreateHauptorganisatorView::onSaveBtnClicked()
     }
 }
 
+//Schließt das Fenster
 void CreateHauptorganisatorView::onExitBtnClicked()
 {
     this->close();

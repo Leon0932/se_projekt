@@ -18,9 +18,8 @@ KontaktView::KontaktView(QWidget *parent) :
     connect(ui->abbBtn, SIGNAL(clicked(bool)), this, SLOT(onAbbBtnClick()));
 }
 
-KontaktView::KontaktView(CreateHauptorganisatorView *baseForm, list<Kontakt*> &kList) : KontaktView()
+KontaktView::KontaktView(list<Kontakt*> &kList) : KontaktView()
 {
-    this->baseForm = baseForm;
     this->kList = &kList;
     ui->tableWidget->setRowCount(kList.size());
     int counter = 0;
@@ -35,51 +34,7 @@ KontaktView::KontaktView(CreateHauptorganisatorView *baseForm, list<Kontakt*> &k
     updateComboBox();
 }
 
-KontaktView::KontaktView(CreateHauptorganisatorView *baseForm, list<Kontakt *> &kList, int &hkPos) : KontaktView(baseForm, kList)
-{
-    this->hauptkontaktPos = &hkPos;
-}
-
-KontaktView::KontaktView(AddKlassenmitgliedView *baseForm, list<Kontakt *> &kList) : KontaktView()
-{
-    this->kmForm = baseForm;
-    this->kList = &kList;
-    ui->tableWidget->setRowCount(kList.size());
-    int counter = 0;
-    for (auto const& kontakt : kList) {
-        QTableWidgetItem *vorwahlItem = new QTableWidgetItem(QString::fromStdString(kontakt->getVorwahl()));
-        QTableWidgetItem *nummerItem = new QTableWidgetItem(QString::fromStdString(kontakt->getNummer()));
-
-        ui->tableWidget->setItem(counter, 0, vorwahlItem);
-        ui->tableWidget->setItem(counter, 1, nummerItem);
-        counter++;
-    }
-    updateComboBox();
-}
-
-KontaktView::KontaktView(AddKlassenmitgliedView *baseForm, list<Kontakt *> &kList, int &hkPos) : KontaktView(baseForm, kList)
-{
-    this->hauptkontaktPos = &hkPos;
-}
-
-KontaktView::KontaktView(ProfileView *baseForm, list<Kontakt *> &kList) : KontaktView()
-{
-    this->profileView = baseForm;
-    this->kList = &kList;
-    ui->tableWidget->setRowCount(kList.size());
-    int counter = 0;
-    for (auto const& kontakt : kList) {
-        QTableWidgetItem *vorwahlItem = new QTableWidgetItem(QString::fromStdString(kontakt->getVorwahl()));
-        QTableWidgetItem *nummerItem = new QTableWidgetItem(QString::fromStdString(kontakt->getNummer()));
-
-        ui->tableWidget->setItem(counter, 0, vorwahlItem);
-        ui->tableWidget->setItem(counter, 1, nummerItem);
-        counter++;
-    }
-    updateComboBox();
-}
-
-KontaktView::KontaktView(ProfileView *baseForm, list<Kontakt *> &kList, int &hkPos) : KontaktView(baseForm, kList)
+KontaktView::KontaktView(list<Kontakt *> &kList, int &hkPos) : KontaktView(kList)
 {
     this->hauptkontaktPos = &hkPos;
 }
