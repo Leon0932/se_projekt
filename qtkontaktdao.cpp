@@ -7,10 +7,8 @@ QtKontaktDAO::QtKontaktDAO()
 {
     insert_query.prepare("INSERT INTO Kontakt (nummer, vorwahl, daten_id) VALUES (:nummer, :vorwahl, :daten_id)");
     update_query.prepare("UPDATE Kontakt SET nummer=:nummer, vorwahl=:vorwahl, daten_id=:daten_id WHERE id=:id");
-    remove_query.prepare("DELETE FROM Kontakt WHERE id=:id");
     search_query.prepare("SELECT nummer, vorwahl, daten_id FROM Kontakt WHERE id=:id");
     select_query.prepare("SELECT * FROM Kontakt WHERE daten_id=:daten_id");
-    clean_query.prepare("DELETE FROM Kontakt");
 }
 
 bool QtKontaktDAO::insert(Kontakt &kontakt)
@@ -32,12 +30,6 @@ bool QtKontaktDAO::update(Kontakt &kontakt)
     update_query.bindValue(":daten_id", kontakt.getDaten()->getId());
     update_query.bindValue(":id", kontakt.getId());
     return update_query.exec();
-}
-
-bool QtKontaktDAO::remove(int id)
-{
-    remove_query.bindValue(":id", id);
-    return remove_query.exec();
 }
 
 bool QtKontaktDAO::search(Kontakt &kontakt)
@@ -71,9 +63,4 @@ bool QtKontaktDAO::select(Kontakt &kontakt, std::list<Kontakt *> &kontaktList)
         kontaktList.push_back(k);
     }
     return true;
-}
-
-bool QtKontaktDAO::clean()
-{
-    return clean_query.exec();
 }

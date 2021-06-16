@@ -11,7 +11,6 @@ public:
     virtual bool update(Organisator &organisator) = 0;
     virtual bool remove(int id) = 0;
     virtual bool search(Organisator &organisator) = 0;
-    virtual bool clean() = 0;
 };
 
 #endif // ORGANISATORDAO_H

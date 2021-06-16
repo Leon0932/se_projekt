@@ -103,21 +103,6 @@ bool checkHauptorganistorExists() {
     return hdao->fetch(h);
 }
 
-// Deletes all data from every table. Doesn't recreate tables and thus indexes are not reset!
-void clean() {
-    QtKlassenmitgliedDAO kdao = QtKlassenmitgliedDAO();
-    QtOrganisatorDAO odao = QtOrganisatorDAO();
-    QtHauptorganisatorDAO hdao = QtHauptorganisatorDAO();
-    QtDatenDAO ddao = QtDatenDAO();
-    QtKontaktDAO kodao = QtKontaktDAO();
-
-    kdao.clean();
-    odao.clean();
-    hdao.clean();
-    ddao.clean();
-    kodao.clean();
-}
-
 void createTestData() {
     KlassenmitgliedDAO *kdao = new QtKlassenmitgliedDAO();
     OrganisatorDAO *odao = new QtOrganisatorDAO();

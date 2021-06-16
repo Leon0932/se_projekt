@@ -17,7 +17,6 @@ QtDatenDAO::QtDatenDAO()
     search_email_query.prepare("SELECT * FROM Daten WHERE email=:email");
     select_newest_query.prepare("SELECT * FROM Daten d1 WHERE km_id=:km_id AND zeitpunkt = (SELECT max(zeitpunkt) FROM Daten d2 WHERE d1.km_id=d2.km_id);");
     select_query.prepare("SELECT * FROM Daten d1 WHERE zeitpunkt = (SELECT max(zeitpunkt) FROM Daten d2 WHERE d1.km_id = d2.km_id) ORDER BY name, nachname;");
-    clean_query.prepare("DELETE FROM Daten");
 }
 
 bool QtDatenDAO::insert(Daten &daten)
@@ -49,17 +48,10 @@ bool QtDatenDAO::update(Daten &daten)
 
 bool QtDatenDAO::updateHauptkontakt(Daten &daten)
 {
-    //updateHK_query.prepare("UPDATE Daten SET hauptkontakt=:hk_id WHERE id=:id;");
-    //UPDATE Daten SET hauptkontakt=11 WHERE id=15
     updateHK_query.bindValue(":hk_id", daten.getHauptkontakt()->getId());
     updateHK_query.bindValue(":id", daten.getId());
 
     return updateHK_query.exec();
-}
-
-bool QtDatenDAO::remove(int id)
-{
-    return true;
 }
 
 bool QtDatenDAO::search(Daten &daten, std::list<Daten *> &datenList)
@@ -185,9 +177,4 @@ bool QtDatenDAO::select(Daten &daten, std::list<Daten *> *datenList)
         datenList->push_back(d);
     }
     return true;
-}
-
-bool QtDatenDAO::clean()
-{
-    return clean_query.exec();
 }
