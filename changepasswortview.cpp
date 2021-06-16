@@ -6,6 +6,7 @@
 
 #include "QMessageBox"
 
+//Hauptkonstruktor welcher den Titel des Fensters setzt und die Signals der Buttons mit den Slots verbindet
 ChangePasswortView::ChangePasswortView(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ChangePasswortView)
@@ -16,6 +17,7 @@ ChangePasswortView::ChangePasswortView(QWidget *parent) :
     connect(ui->cancelBtn, SIGNAL(clicked(bool)), this, SLOT(onAbbBtnClick()));
 }
 
+//Konstruktor der den Organisator und ob die Klassenliste gezeigt werden soll setzt
 ChangePasswortView::ChangePasswortView(Organisator &org, bool openKlassenView) : ChangePasswortView()
 {
     this->org = &org;
@@ -27,6 +29,8 @@ ChangePasswortView::~ChangePasswortView()
     delete ui;
 }
 
+//prüft ob passwort gleich sind, nicht standardpasswort und vorhanden
+//wenn ja wird das passwort in der Datenbank upgedatet
 void ChangePasswortView::onOkBtnClick()
 {
     string newPw = ui->newPwTbx->text().toStdString();
@@ -41,17 +45,26 @@ void ChangePasswortView::onOkBtnClick()
     }
 
     if (newPw.compare("password") == 0) {
-        qDebug() << "password kann nicht pw sein";
+        QMessageBox *box = new QMessageBox();
+        box->setIcon(QMessageBox::Critical);
+        box->setText("passwort kann nicht standardpasswort sein!");
+        box->show();
         return;
     }
     if (newPw.compare(wdpPw) != 0) {
-        qDebug() << "passwörter sind nicht gleich";
+        QMessageBox *box = new QMessageBox();
+        box->setIcon(QMessageBox::Critical);
+        box->setText("Passwörter sind nicht gleich");
+        box->show();
         return;
     }
     OrganisatorDAO *odao = new QtOrganisatorDAO();
     this->org->setPassword(newPw);
     if (!odao->update(*org)) {
-        qDebug() << "password nicht geändert";
+        QMessageBox *box = new QMessageBox();
+        box->setIcon(QMessageBox::Critical);
+        box->setText("Passwort konnte nicht geändert werden");
+        box->show();
     }
 
     if (this->openKlassenView) {
@@ -65,9 +78,8 @@ void ChangePasswortView::onOkBtnClick()
     this->close();
 }
 
+//schließt das Fenster
 void ChangePasswortView::onAbbBtnClick()
 {
-//    LoginView *lv = new LoginView();
-//    lv->show();
     this->close();
 }

@@ -13,6 +13,7 @@
 #include "qtorganisatordao.h"
 #include "qthauptorganisatordao.h"
 
+//Huptkonstruktor welcher den Titel des Fensters setzt und die Signals der Buttons mit den Slots verbindet
 AddKlassenmitgliedView::AddKlassenmitgliedView(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::AddKlassenmitgliedView)
@@ -27,6 +28,8 @@ AddKlassenmitgliedView::AddKlassenmitgliedView(QWidget *parent) :
     connect(ui->kontakteBtn, SIGNAL(clicked(bool)), this, SLOT(onKontakteBtnClicked()));
 }
 
+//Konstruktor mit Email des Organisators.
+//Setzt die Labels um dies anzuzeigen und ruft den Standardkonstruktor auf
 AddKlassenmitgliedView::AddKlassenmitgliedView(std::string nemail) : AddKlassenmitgliedView()
 {
     email = nemail;
@@ -47,6 +50,9 @@ AddKlassenmitgliedView::AddKlassenmitgliedView(std::string nemail) : AddKlassenm
     }
 }
 
+//Funktion wenn man übernehmen clickt.
+//Es wird geprüft, dass eine Email gegeben ist, da diese zum Login benötigt wird
+//Wenn diese Okay sind werden diese in die Datenbank geschrieben
 void AddKlassenmitgliedView::onUebernehmenBtnClicked()
 {
     if (email.empty()) {
@@ -103,6 +109,7 @@ void AddKlassenmitgliedView::onUebernehmenBtnClicked()
     this->close();
 }
 
+//Beim Abbrechen wird wieder die Klassenliste angezeigt
 void AddKlassenmitgliedView::onAbbrechenBtnClicked()
 {
     ShowKlassenlisteView *kl = new ShowKlassenlisteView(this->email);
@@ -110,6 +117,7 @@ void AddKlassenmitgliedView::onAbbrechenBtnClicked()
     this->close();
 }
 
+//Beim Ausloggen wird man wieder zum Login Screen gebracht
 void AddKlassenmitgliedView::onAusloggenBtnClicked()
 {
     LoginView *lv = new LoginView();
@@ -122,20 +130,22 @@ AddKlassenmitgliedView::~AddKlassenmitgliedView()
     delete ui;
 }
 
+//Das Kontakte Fenster wird geöffnet
 void AddKlassenmitgliedView::onKontakteBtnClicked()
 {
     KontaktView *kv = new KontaktView(this, kontaktList, hauptKontaktPos);
     kv->show();
 }
 
+//Beim Abbrechen wird wieder die Klassenliste angezeigt
 void AddKlassenmitgliedView::onKlassenlisteBtnClicked()
 {
-    qDebug() << QString::fromStdString(email);
     ShowKlassenlisteView *kl = new ShowKlassenlisteView(email);
     kl->show();
     this->close();
 }
 
+//Die Profileansicht der eingeloggten Person wird angezeigt
 void AddKlassenmitgliedView::onMeineDatenBtnClicked()
 {
     ProfileView *pv = new ProfileView(email, email);
